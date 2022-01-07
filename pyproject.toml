@@ -5,7 +5,7 @@ description = "This project was generated with fastapi-mvc."
 authors = ["Radosław Szamszur <radoslawszamszur@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-repository = "https://your.repo.url.here"
+repository = "https://github.com/rszamszur/fastapi-mvc-example"
 classifiers = [
     'Intended Audience :: Developers',
     'Natural Language :: English',
@@ -41,7 +41,7 @@ black = "^21.12b0"
 fastapi-mvc-example = 'fastapi_mvc_example.cli.cli:cli'
 
 [tool.poetry.urls]
-"Issues" = "https://your.repo.url.here/issues"
+"Issues" = "https://github.com/rszamszur/fastapi-mvc-example/issues"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
