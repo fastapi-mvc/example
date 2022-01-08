@@ -34,10 +34,14 @@ fi
 echo "[install] Begin installing project."
 "$POETRY_HOME"/bin/poetry install --no-interaction
 
-cat <<EOF
+cat << 'EOF'
 Project successfully installed.
 To activate virtualenv run: $ poetry shell
 Now you should access CLI script: $ fastapi-mvc-example --help
 Alternatively you can access CLI script via poetry run: $ poetry run fastapi-mvc-example --help
 To deactivate virtualenv simply type: $ deactivate
+To activate shell completion:
+ - for bash: $ echo 'eval "$(_FASTAPI_MVC_EXAMPLE_COMPLETE=source_bash fastapi-mvc-example)' >> ~/.bashrc
+ - for zsh: $ echo 'eval "$(_FASTAPI_MVC_EXAMPLE_COMPLETE=source_zsh fastapi-mvc-example)' >> ~/.zshrc
+ - for fish: $ echo 'eval "$(_FASTAPI_MVC_EXAMPLE_COMPLETE=source_fish fastapi-mvc-example)' >> ~/.config/fish/completions/fastapi-mvc-example.fish
 EOF
