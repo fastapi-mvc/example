@@ -39,7 +39,7 @@ async def readiness_check():
 
     """
     log.info("Started GET /ready")
- 
+
     if settings.USE_REDIS and not await RedisClient.ping():
         log.error("Could not connect to Redis")
         raise HTTPException(
