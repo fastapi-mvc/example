@@ -309,7 +309,6 @@ All routes documentation is available on:
 * `/` with Swagger
 * `/redoc` or ReDoc.
 
-
 ## License
 
 This project is licensed under the terms of the MIT license.
