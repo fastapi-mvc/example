@@ -15,6 +15,11 @@ def test_ready():
         assert response.json() == {"status": "ok"}
 
 
+def test_ready_invalid():
+    with TestClient(app) as client:
+        response = client.get("/api/ready/123")
+        assert response.status_code == 404
+
 
 def test_ready_invalid_with_redis():
     settings.USE_REDIS = True
@@ -26,13 +31,6 @@ def test_ready_invalid_with_redis():
             "error": {
                 "code": 502,
                 "message": "Could not connect to Redis",
-                "status": "BAD_GATEWAY"
+                "status": "BAD_GATEWAY",
             }
         }
-
-
-
-def test_ready_invalid():
-    with TestClient(app) as client:
-        response = client.get("/api/ready/123")
-        assert response.status_code == 404

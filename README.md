@@ -138,10 +138,17 @@ Usage: fastapi-mvc-example serve [OPTIONS]
   fastapi-mvc-example CLI serve command.
 
 Options:
-  --host TEXT                  Host to bind.  [default: localhost]
+  --host TEXT                  Host to bind.  [default: 127.0.0.1]
   -p, --port INTEGER           Port to bind.  [default: 8000]
   -w, --workers INTEGER RANGE  The number of worker processes for handling
-                               requests.  [default: 2;1<=x<=8]
+                               requests.  [default: 2]
+
+  -D, --daemon                 Daemonize the Gunicorn process.
+  -e, --env TEXT               Set environment variables in the execution
+                               environment.
+
+  -c, --config PATH            Uses a custom gunicorn.conf.py configuration
+  --pid PATH                   Specifies the PID file.
   --help                       Show this message and exit.
 ```
 

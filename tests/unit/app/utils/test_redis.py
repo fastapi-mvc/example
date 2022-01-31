@@ -11,6 +11,7 @@ from fastapi_mvc_example.config import redis as redis_conf
 async def async_magic():
     pass
 
+
 mock.MagicMock.__await__ = lambda x: async_magic().__await__()
 
 

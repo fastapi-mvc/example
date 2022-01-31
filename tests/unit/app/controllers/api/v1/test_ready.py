@@ -13,7 +13,6 @@ def test_ready_invalid(app):
     assert response.status_code == 404
 
 
-
 def test_ready_invalid_with_redis(app):
     settings.USE_REDIS = True
     response = app.get("/api/ready")
@@ -22,7 +21,6 @@ def test_ready_invalid_with_redis(app):
         "error": {
             "code": 502,
             "message": "Could not connect to Redis",
-            "status": "BAD_GATEWAY"
+            "status": "BAD_GATEWAY",
         }
     }
-
