@@ -2,7 +2,7 @@
 [![CI](https://github.com/rszamszur/fastapi-mvc-example/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/rszamszur/fastapi-mvc-example/actions/workflows/main.yml)
 [![K8s integration](https://github.com/rszamszur/fastapi-mvc-example/actions/workflows/integration.yml/badge.svg)](https://github.com/rszamszur/fastapi-mvc-example/actions/workflows/integration.yml)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-![GitHub](https://img.shields.io/badge/fastapi-v.0.70.0-blue)
+![GitHub](https://img.shields.io/badge/fastapi-v.0.75.0-blue)
 ![GitHub](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9-blue)
 ![GitHub](https://img.shields.io/badge/license-MIT-blue)
 
@@ -29,6 +29,13 @@ For infrastructure:
 * helm version 3.0.0 or higher [How_to_install_helm](https://helm.sh/docs/intro/install/)
 * kubectl version 1.16 up to 1.20.8 [How_to_install_kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
 * Container runtime interface. NOTE! dev-env script uses docker for minikube, for other CRI you'll need to modify this line in dev-env.sh `MINIKUBE_IN_STYLE=0 minikube start --driver=docker 2>/dev/null`
+
+### Environment with [Nix](https://nixos.org/)
+
+To start a shell with development environment run:
+```shell
+nix-shell shell.nix
+```
 
 ## Quickstart
 First run `vagrant up` in project root directory and enter virtualized environment using `vagrant ssh`
