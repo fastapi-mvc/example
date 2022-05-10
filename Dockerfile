@@ -64,4 +64,6 @@ EXPOSE 8000/tcp
 
 STOPSIGNAL SIGINT
 
-ENTRYPOINT ["fastapi-mvc-example", "serve", "--host", "0.0.0.0"]
+ENTRYPOINT ["fastapi-mvc-example"]
+
+CMD ["serve", "--bind", "0.0.0.0:8000"]

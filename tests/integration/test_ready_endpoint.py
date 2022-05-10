@@ -1,9 +1,9 @@
 from fastapi.testclient import TestClient
-from fastapi_mvc_example.app.asgi import get_app
+from fastapi_mvc_example.app import get_application
 from fastapi_mvc_example.config import settings
 
 
-app = get_app()
+app = get_application()
 
 
 def test_ready():

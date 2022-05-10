@@ -131,7 +131,7 @@ This package exposes simple CLI for easier interaction:
 $ fastapi-mvc-example --help
 Usage: fastapi-mvc-example [OPTIONS] COMMAND [ARGS]...
 
-  fastapi-mvc-example CLI root.
+  Fastapi-mvc-example CLI root.
 
 Options:
   -v, --verbose  Enable verbose logging.
@@ -142,19 +142,15 @@ Commands:
 $ fastapi-mvc-example serve --help
 Usage: fastapi-mvc-example serve [OPTIONS]
 
-  fastapi-mvc-example CLI serve command.
+  Run production gunicorn (WSGI) server with uvicorn (ASGI) workers.
 
 Options:
-  --host TEXT                  Host to bind.  [default: 127.0.0.1]
-  -p, --port INTEGER           Port to bind.  [default: 8000]
+  --bind TEXT                  Host to bind.
   -w, --workers INTEGER RANGE  The number of worker processes for handling
-                               requests.  [default: 2]
-
+                               requests.
   -D, --daemon                 Daemonize the Gunicorn process.
   -e, --env TEXT               Set environment variables in the execution
                                environment.
-
-  -c, --config PATH            Uses a custom gunicorn.conf.py configuration
   --pid PATH                   Specifies the PID file.
   --help                       Show this message and exit.
 ```
@@ -200,7 +196,7 @@ You can modify all other available configuration settings in the gunicorn.conf.p
 Priority of overriding configuration:
 1. cli
 2. environment variables
-3. gunicorn.conf.py
+3. gunicorn.py
 
 All application configuration is available in `fastapi_mvc_example.config` submodule.
 
@@ -238,17 +234,17 @@ All application configuration is available in `fastapi_mvc_example.config` submo
 
 ### Routes definition
 
-Endpoints are defined in `fastapi_mvc_example.config.router`. Just simply import your controller and include it to FastAPI router:
+Endpoints are defined in `fastapi_mvc_example.app.router`. Just simply import your controller and include it to FastAPI router:
 
 ```python
 from fastapi import APIRouter
 from fastapi_mvc_example.app.controllers.api.v1 import ready
 
-router = APIRouter(
+root_api_router = APIRouter(
     prefix="/api"
 )
 
-router.include_router(ready.router, tags=["ready"])
+root_api_router.include_router(ready.router, tags=["ready"])
 ```
 
 ## Development

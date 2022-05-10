@@ -1,12 +1,18 @@
-# -*- coding: utf-8 -*-
-"""This project was generated with fastapi-mvc."""
-from .application import settings
-from .redis import redis
-from .router import router
+"""Application configuration.
 
+The ``config`` submodule defines configuration for your application, router,
+gunicorn, and more.
 
-__all__ = (
-    settings,
-    redis,
-    router,
-)
+Resources:
+    1. `Pydantic documentation`_
+    2. `Gunicorn documentation`_
+
+.. _Pydantic documentation:
+    https://pydantic-docs.helpmanual.io/
+
+.. _Gunicorn documentation:
+    https://docs.gunicorn.org/en/20.1.0/
+
+"""
+from fastapi_mvc_example.config.application import settings
+from fastapi_mvc_example.config.redis import redis

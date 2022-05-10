@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Redis client class utility."""
 import logging
 
@@ -9,7 +8,7 @@ from fastapi_mvc_example.config import redis as redis_conf
 
 
 class RedisClient(object):
-    """Redis client utility.
+    """Define Redis utility.
 
     Utility class for handling Redis database connection and operations.
 

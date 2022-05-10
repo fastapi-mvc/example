@@ -1,6 +1,11 @@
 import mock
-from fastapi_mvc_example.config import settings, router
-from fastapi_mvc_example.app.asgi import get_app, on_startup, on_shutdown
+from fastapi_mvc_example.config import settings
+from fastapi_mvc_example.app.router import root_api_router
+from fastapi_mvc_example.app.asgi import (
+    get_application,
+    on_startup,
+    on_shutdown,
+)
 from fastapi_mvc_example.app.exceptions import (
     HTTPException,
     http_exception_handler,
@@ -9,7 +14,7 @@ from fastapi_mvc_example.app.exceptions import (
 
 @mock.patch("fastapi_mvc_example.app.asgi.FastAPI")
 def test_get_app(mock_fastapi):
-    mock_app = get_app()
+    mock_app = get_application()
     # check init kwargs
     mock_fastapi.assert_called_once_with(
         title=settings.PROJECT_NAME,
@@ -20,7 +25,7 @@ def test_get_app(mock_fastapi):
         on_shutdown=[on_shutdown],
     )
 
-    mock_app.include_router.assert_called_once_with(router)
+    mock_app.include_router.assert_called_once_with(root_api_router)
     mock_app.add_exception_handler.assert_called_once_with(
         HTTPException, http_exception_handler
     )

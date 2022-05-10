@@ -38,6 +38,10 @@ unit-test: install ## Run fastapi-mvc-example unit tests
 integration-test: install ## Run fastapi-mvc-example integration tests
 	@build/integration-test.sh
 
+.PHONY: docs
+docs: install ## Build fastapi-mvc-example documentation
+	@build/docs.sh
+
 .PHONY: dev-env
 dev-env: image ## Start a local Kubernetes cluster using minikube and deploy application
 	@build/dev-env.sh

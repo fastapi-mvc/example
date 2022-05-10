@@ -1,12 +1,14 @@
-# -*- coding: utf-8 -*-
-"""fastapi-mvc-example CLI root."""
+"""Command-line interface - root."""
 import logging
 
 import click
-from fastapi_mvc_example.cli.commands.serve import serve
+from fastapi_mvc_example.cli.serve import serve
 
 
-@click.group()
+cmd_help = "Fastapi-mvc-example CLI root."
+
+
+@click.group(help=cmd_help)
 @click.option(
     "-v",
     "--verbose",
@@ -15,7 +17,13 @@ from fastapi_mvc_example.cli.commands.serve import serve
     default=False,
 )
 def cli(**options):
-    """fastapi-mvc-example CLI root."""
+    """Define command-line interface root.
+
+    Args:
+        options (typing.Dict[str, typing.Any]): Map of command option names to
+            their parsed values.
+
+    """
     if options["verbose"]:
         level = logging.DEBUG
     else:
