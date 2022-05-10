@@ -1,0 +1,4 @@
+[run]
+omit =
+    fastapi_mvc_example/config/gunicorn.py
+    fastapi_mvc_example/__main__.py
