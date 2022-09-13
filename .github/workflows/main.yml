@@ -1,6 +1,6 @@
 name: CI
 
-on: [push, pull_request, workflow_call]
+on: [push, pull_request, workflow_dispatch]
 
 env:
   POETRY_HOME: /opt/poetry
