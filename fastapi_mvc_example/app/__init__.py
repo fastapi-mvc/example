@@ -15,3 +15,6 @@ Resources:
 
 """
 from fastapi_mvc_example.app.asgi import get_application
+
+
+__all__ = ("get_application",)

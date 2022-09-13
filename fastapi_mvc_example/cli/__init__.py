@@ -11,3 +11,6 @@ Resources:
 
 """
 from fastapi_mvc_example.cli.cli import cli
+
+
+__all__ = ("cli",)

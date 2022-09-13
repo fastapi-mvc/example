@@ -16,3 +16,6 @@ Resources:
 """
 from fastapi_mvc_example.config.application import settings
 from fastapi_mvc_example.config.redis import redis
+
+
+__all__ = ("settings", "redis")

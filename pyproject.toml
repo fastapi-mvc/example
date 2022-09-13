@@ -2,7 +2,7 @@
 name = "fastapi-mvc-example"
 version = "0.1.0"
 description = "This project was generated with fastapi-mvc."
-authors = ["Radosław Szamszur <radoslawszamszur@gmail.com>"]
+authors = ["John Doe <example@email.com>"]
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/rszamszur/fastapi-mvc-example"
@@ -13,16 +13,17 @@ classifiers = [
     'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
 ]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-fastapi = "~0.75.0"
-uvicorn = {extras = ["standard"], version = "~0.17.0"}
+fastapi = "~0.82.0"
+uvicorn = {extras = ["standard"], version = "~0.18.3"}
 gunicorn = "~20.1.0"
 click = "~8.1.3"
-aioredis = "~2.0.0"
-aiohttp = "~3.8.0"
+aioredis = "~2.0.1"
+aiohttp = "~3.8.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "~6.2.4"

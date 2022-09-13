@@ -6,3 +6,6 @@ Resources:
 """
 from fastapi_mvc_example.app.utils.aiohttp_client import AiohttpClient
 from fastapi_mvc_example.app.utils.redis import RedisClient
+
+
+__all__ = ("AiohttpClient", "RedisClient")

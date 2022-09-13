@@ -7,6 +7,7 @@ from fastapi_mvc_example.app.utils import RedisClient
 from fastapi_mvc_example.app.views import ReadyResponse, ErrorResponse
 from fastapi_mvc_example.app.exceptions import HTTPException
 
+
 router = APIRouter()
 log = logging.getLogger(__name__)
 
@@ -47,4 +48,5 @@ async def readiness_check():
                 code=502, message="Could not connect to Redis"
             ).dict(exclude_none=True),
         )
+
     return ReadyResponse(status="ok")

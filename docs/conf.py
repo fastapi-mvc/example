@@ -9,8 +9,8 @@ from pallets_sphinx_themes import ProjectLink
 # Project --------------------------------------------------------------
 
 project = "fastapi-mvc-example"
-copyright = "2022, Radosław Szamszur"
-author = "Radosław Szamszur"
+copyright = "2022, John Doe"
+author = "John Doe"
 release = __version__
 
 # General --------------------------------------------------------------
