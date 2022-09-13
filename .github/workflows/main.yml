@@ -1,6 +1,11 @@
 name: CI
 
-on: [push, pull_request]
+on: [push, pull_request, workflow_call]
+
+env:
+  POETRY_HOME: /opt/poetry
+  POETRY_CONFIG_DIR: /opt/poetry
+  POETRY_VIRTUALENVS_PATH: /opt/poetry/store
 
 jobs:
   # This job checks if an identical workflow is being triggered by different
@@ -33,15 +38,12 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Init Poetry cache
         id: cached-poetry
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
-          path: ~/.poetry
-          key: poetry-${{ matrix.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/poetry.lock') }}
-      - name: Install project
-        run: |
-          export POETRY_HOME=$HOME/.poetry
-          export POETRY_CACHE_DIR=$HOME/.poetry/store
-          make install
+          path: ${{ env.POETRY_HOME }}
+          key: python${{ matrix.python-version }}-${{ hashFiles('./pyproject.toml') }}-${{ hashFiles('./poetry.lock') }}
+      - name: Install package
+        run: make install
         if: steps.cached-poetry.outputs.cache-hit != 'true'
   build:
     needs: install
@@ -54,21 +56,18 @@ jobs:
         with:
           python-version: 3.9
       - name: Load Poetry cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
-          path: ~/.poetry
-          key: poetry-3.9-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/poetry.lock') }}
+          path: ${{ env.POETRY_HOME }}
+          key: python3.9-${{ hashFiles('./pyproject.toml') }}-${{ hashFiles('./poetry.lock') }}
       - name: Build wheel
-        run: |
-          $HOME/.poetry/bin/poetry config cache-dir $HOME/.poetry/store
-          $HOME/.poetry/bin/poetry build
-          echo "whl_name=fastapi_mvc_example-$(cat TAG)-$GITHUB_SHA" >> $GITHUB_ENV
+        run: $POETRY_HOME/bin/poetry build
       - name: Archive build artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.whl_name }}
+          name: ${{ format('fastapi_mvc-{0}', github.sha) }}
           path: dist
-          retention-days: 7
+          retention-days: 60
   metrics:
     needs: install
     runs-on: ubuntu-latest
@@ -83,14 +82,10 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Load Poetry cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
-          path: ~/.poetry
-          key: poetry-${{ matrix.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/poetry.lock') }}
-      - name: Config path and poetry
-        run: |
-          echo "$HOME/.poetry/bin" >> $GITHUB_PATH
-          $HOME/.poetry/bin/poetry config cache-dir $HOME/.poetry/store
+          path: ${{ env.POETRY_HOME }}
+          key: python${{ matrix.python-version }}-${{ hashFiles('./pyproject.toml') }}-${{ hashFiles('./poetry.lock') }}
       - name: Run metrics checks
         run: make metrics
   unit-tests:
@@ -107,14 +102,10 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Load Poetry cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
-          path: ~/.poetry
-          key: poetry-${{ matrix.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/poetry.lock') }}
-      - name: Config path and poetry
-        run: |
-          echo "$HOME/.poetry/bin" >> $GITHUB_PATH
-          $HOME/.poetry/bin/poetry config cache-dir $HOME/.poetry/store
+          path: ${{ env.POETRY_HOME }}
+          key: python${{ matrix.python-version }}-${{ hashFiles('./pyproject.toml') }}-${{ hashFiles('./poetry.lock') }}
       - name: Run unit tests
         run: make unit-test
   integration-tests:
@@ -131,14 +122,10 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Load Poetry cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
-          path: ~/.poetry
-          key: poetry-${{ matrix.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/poetry.lock') }}
-      - name: Config path and poetry
-        run: |
-          echo "$HOME/.poetry/bin" >> $GITHUB_PATH
-          $HOME/.poetry/bin/poetry config cache-dir $HOME/.poetry/store
+          path: ${{ env.POETRY_HOME }}
+          key: python${{ matrix.python-version }}-${{ hashFiles('./pyproject.toml') }}-${{ hashFiles('./poetry.lock') }}
       - name: Run integration tests
         run: make integration-test
   coverage:
@@ -155,13 +142,9 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Load Poetry cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
-          path: ~/.poetry
-          key: poetry-${{ matrix.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/poetry.lock') }}
-      - name: Config path and poetry
-        run: |
-          echo "$HOME/.poetry/bin" >> $GITHUB_PATH
-          $HOME/.poetry/bin/poetry config cache-dir $HOME/.poetry/store
+          path: ${{ env.POETRY_HOME }}
+          key: python${{ matrix.python-version }}-${{ hashFiles('./pyproject.toml') }}-${{ hashFiles('./poetry.lock') }}
       - name: Run coverage
         run: poetry run pytest --cov=fastapi_mvc_example --cov-fail-under=70 --cov-report=xml --cov-report=term-missing tests
