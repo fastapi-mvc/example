@@ -1,6 +1,13 @@
 name: CI
 
-on: [push, pull_request, workflow_dispatch]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      distinct_id:
+        required: true
+        description: "Seems to be required by codex-/return-dispatch@v1"
 
 env:
   POETRY_HOME: /opt/poetry
