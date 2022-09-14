@@ -3,6 +3,12 @@ name: CI
 on:
   push:
   pull_request:
+  workflow_call:
+    inputs:
+      distinct_id:
+        required: true
+        type: string
+        description: "Seems to be required by codex-/return-dispatch@v1"
   workflow_dispatch:
     inputs:
       distinct_id:
