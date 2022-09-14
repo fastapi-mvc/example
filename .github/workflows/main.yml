@@ -3,17 +3,16 @@ name: CI
 on:
   push:
   pull_request:
-  workflow_call:
-    inputs:
-      distinct_id:
-        required: true
-        type: string
-        description: "Seems to be required by codex-/return-dispatch@v1"
+# This trigger is required by fastapi-mvc automation to dispatch this concrete workflow
+# from fastapi-mvc 'CI workflow' (https://github.com/rszamszur/fastapi-mvc/actions/workflows/main.yml),
+# and await its result. By no means should this be included in the template this file was generated from.
+# It's just a temporary monkey patch to fulfill the GH automation use case.
+# Feel free to remove it.
   workflow_dispatch:
     inputs:
       distinct_id:
         required: true
-        description: "Seems to be required by codex-/return-dispatch@v1"
+        description: "Input required by codex-/return-dispatch@v1"
 
 env:
   POETRY_HOME: /opt/poetry
@@ -29,6 +28,10 @@ jobs:
     outputs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
     steps:
+      # This echo is required by codex-/return-dispatch@v1 in order to identify dispatched workflow.
+      # By no means should this be included in the template this file was generated from.
+      # It's just a temporary monkey patch to fulfill the GH automation use case.
+      # Feel free to remove it.
       - name: echo distinct ID ${{ github.event.inputs.distinct_id }}
         run: echo ${{ github.event.inputs.distinct_id }}
       - id: skip_check
