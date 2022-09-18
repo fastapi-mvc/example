@@ -1,6 +1,6 @@
 # This digest SHA points to python:3.9-slim-bullseye tag
 FROM python@sha256:a9cf2d58b33ba6f273e80d1f6272186d8930c062fa2a2abc65f35bdf4609a032 as builder
-LABEL maintainer="John Doe, example@email.com"
+LABEL maintainer="Radosław Szamszur, github@rsd.sh"
 
 # Configure environment variables
 ENV PYTHONUNBUFFERED=1 \
@@ -48,7 +48,7 @@ RUN ln -fns /usr/bin/python $VENV_PATH/bin/python
 # For the time being, gcr.io/distroless/python3 doesn't have any tags to particular minor version.
 # This digest SHA points to python3:nonroot
 FROM gcr.io/distroless/python3@sha256:a66e582f67df92987039ad8827f0773f96020661c7ae6272e5ab80e2d3abc897
-LABEL maintainer="John Doe, example@email.com"
+LABEL maintainer="Radosław Szamszur, github@rsd.sh"
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \

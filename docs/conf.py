@@ -9,8 +9,8 @@ from pallets_sphinx_themes import ProjectLink
 # Project --------------------------------------------------------------
 
 project = "example"
-copyright = "2022, John Doe"
-author = "John Doe"
+copyright = "2022, Radosław Szamszur"
+author = "Radosław Szamszur"
 release = __version__
 
 # General --------------------------------------------------------------

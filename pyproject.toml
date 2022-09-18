@@ -2,7 +2,7 @@
 name = "example"
 version = "0.1.0"
 description = "This project was generated with fastapi-mvc."
-authors = ["John Doe <example@email.com>"]
+authors = ["Radosław Szamszur <github@rsd.sh>"]
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/fastapi-mvc/example"

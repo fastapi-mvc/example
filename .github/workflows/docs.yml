@@ -5,12 +5,28 @@ on:
   push:
     branches:
       - master
+  # This trigger is required by fastapi-mvc automation to dispatch this concrete workflow
+  # from fastapi-mvc 'CI workflow' (https://github.com/fastapi-mvc/cookiecutter/actions/workflows/main.yml),
+  # and await its result. By no means should this be included in the template this file was generated from.
+  # It's just a temporary monkey patch to fulfill the GH automation use case.
+  # Feel free to remove it.
+  workflow_dispatch:
+    inputs:
+      distinct_id:
+        required: true
+        description: "Input required by codex-/return-dispatch@v1"
 
 jobs:
   build-docs:
     runs-on: ubuntu-latest
 
     steps:
+      # This echo is required by codex-/return-dispatch@v1 in order to identify dispatched workflow.
+      # By no means should this be included in the template this file was generated from.
+      # It's just a temporary monkey patch to fulfill the GH automation use case.
+      # Feel free to remove it.
+      - name: echo distinct ID ${{ github.event.inputs.distinct_id }}
+        run: echo ${{ github.event.inputs.distinct_id }}
       - uses: actions/checkout@v2
       - name: Set up Python
         uses: actions/setup-python@v2
