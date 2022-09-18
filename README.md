@@ -1,12 +1,12 @@
-# fastapi-mvc-example
-[![CI](https://github.com/rszamszur/fastapi-mvc-example/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/rszamszur/fastapi-mvc-example/actions/workflows/main.yml)
-[![K8s integration](https://github.com/rszamszur/fastapi-mvc-example/actions/workflows/integration.yml/badge.svg)](https://github.com/rszamszur/fastapi-mvc-example/actions/workflows/integration.yml)
+# example
+[![CI](https://github.com/fastapi-mvc/example/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/fastapi-mvc/example/actions/workflows/main.yml)
+[![K8s integration](https://github.com/fastapi-mvc/example/actions/workflows/integration.yml/badge.svg)](https://github.com/fastapi-mvc/example/actions/workflows/integration.yml)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ![GitHub](https://img.shields.io/badge/fastapi-v.0.82.0-blue)
 ![GitHub](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9%20%7C%203.10-blue)
 ![GitHub](https://img.shields.io/badge/license-MIT-blue)
 
-## This project was generated with [fastapi-mvc](https://github.com/rszamszur/fastapi-mvc)
+## This project was generated with [fastapi-mvc](https://github.com/fastapi-mvc/fastapi-mvc)
 
 ---
 
@@ -50,7 +50,7 @@ Once development cluster is up and running you should see summary listing applic
 ```
 Kubernetes cluster ready
 
-fastapi-mvc available under: http://fastapi-mvc-example.192.168.49.2.nip.io/
+fastapi-mvc available under: http://example.192.168.49.2.nip.io/
 
 You can delete dev-env by issuing: minikube delete
 ```
@@ -65,11 +65,11 @@ vagrant@ubuntu-focal:/syncd$ make dev-env
 ...
 ...
 Kubernetes cluster ready
-FastAPI available under: http://fastapi-mvc-example.192.168.49.2.nip.io/
+FastAPI available under: http://example.192.168.49.2.nip.io/
 You can delete dev-env by issuing: make clean
-vagrant@ubuntu-focal:/syncd$ kubectl get all -n fastapi-mvc-example
+vagrant@ubuntu-focal:/syncd$ kubectl get all -n example
 NAME                                                     READY   STATUS    RESTARTS   AGE
-pod/fastapi-mvc-example-7f4dd8dc7f-p2kr7                1/1     Running   0          55s
+pod/example-7f4dd8dc7f-p2kr7                1/1     Running   0          55s
 pod/rfr-redisfailover-persistent-keep-0                  1/1     Running   0          3m39s
 pod/rfr-redisfailover-persistent-keep-1                  1/1     Running   0          3m39s
 pod/rfr-redisfailover-persistent-keep-2                  1/1     Running   0          3m39s
@@ -78,15 +78,15 @@ pod/rfs-redisfailover-persistent-keep-5d46b5bcf8-6kqv5   1/1     Running   0    
 pod/rfs-redisfailover-persistent-keep-5d46b5bcf8-sgtvv   1/1     Running   0          3m39s
 
 NAME                                        TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE
-service/fastapi-mvc-example                ClusterIP   10.110.42.252   <none>        8000/TCP    56s
+service/example                ClusterIP   10.110.42.252   <none>        8000/TCP    56s
 service/rfs-redisfailover-persistent-keep   ClusterIP   10.110.4.24     <none>        26379/TCP   3m39s
 
 NAME                                                READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/fastapi-mvc-example                1/1     1            1           55s
+deployment.apps/example                1/1     1            1           55s
 deployment.apps/rfs-redisfailover-persistent-keep   3/3     3            3           3m39s
 
 NAME                                                           DESIRED   CURRENT   READY   AGE
-replicaset.apps/fastapi-mvc-example-7f4dd8dc7f                1         1         1       55s
+replicaset.apps/example-7f4dd8dc7f                1         1         1       55s
 replicaset.apps/rfs-redisfailover-persistent-keep-5d46b5bcf8   3         3         3       3m39s
 
 NAME                                                 READY   AGE
@@ -94,7 +94,7 @@ statefulset.apps/rfr-redisfailover-persistent-keep   3/3     3m39s
 
 NAME                                                                  AGE
 redisfailover.databases.spotahome.com/redisfailover-persistent-keep   3m39s
-vagrant@ubuntu-focal:/syncd$ curl http://fastapi-mvc-example.192.168.49.2.nip.io/api/ready
+vagrant@ubuntu-focal:/syncd$ curl http://example.192.168.49.2.nip.io/api/ready
 {"status":"ok"}
 ```
 
@@ -118,7 +118,7 @@ Or using poetry directly:
 poetry install
 ```
 
-To bootstrap local minikube Kubernetes cluster exposing `fastapi-mvc-example` application:
+To bootstrap local minikube Kubernetes cluster exposing `example` application:
 ```shell
 make dev-env
 ```
@@ -128,19 +128,19 @@ make dev-env
 This package exposes simple CLI for easier interaction:
 
 ```shell
-$ fastapi-mvc-example --help
-Usage: fastapi-mvc-example [OPTIONS] COMMAND [ARGS]...
+$ example --help
+Usage: example [OPTIONS] COMMAND [ARGS]...
 
-  Fastapi-mvc-example CLI root.
+  Example CLI root.
 
 Options:
   -v, --verbose  Enable verbose logging.
   --help         Show this message and exit.
 
 Commands:
-  serve  fastapi-mvc-example CLI serve command.
-$ fastapi-mvc-example serve --help
-Usage: fastapi-mvc-example serve [OPTIONS]
+  serve  example CLI serve command.
+$ example serve --help
+Usage: example serve [OPTIONS]
 
   Run production gunicorn (WSGI) server with uvicorn (ASGI) workers.
 
@@ -160,7 +160,7 @@ Options:
 To serve application simply run:
 
 ```shell
-$ fastapi-mvc-example serve
+$ example serve
 ```
 
 To confirm it's working:
@@ -177,11 +177,11 @@ This repository provides Dockerfile for virtualized environment.
 *NOTE: Replace podman with docker if it's yours containerization engine.*
 ```shell
 $ make image
-$ podman run -dit --name fastapi-mvc-example -p 8000:8000 fastapi-mvc-example:$(cat TAG)
+$ podman run -dit --name example -p 8000:8000 example:$(cat TAG)
 f41e5fa7ffd512aea8f1aad1c12157bf1e66f961aeb707f51993e9ac343f7a4b
 $ podman ps
 CONTAINER ID  IMAGE                                 COMMAND               CREATED        STATUS            PORTS                   NAMES
-f41e5fa7ffd5  localhost/fastapi-mvc-example:0.1.0  /usr/bin/fastapi ...  2 seconds ago  Up 3 seconds ago  0.0.0.0:8000->8000/tcp  fastapi-mvc-example
+f41e5fa7ffd5  localhost/example:0.1.0  /usr/bin/fastapi ...  2 seconds ago  Up 3 seconds ago  0.0.0.0:8000->8000/tcp  example
 $ curl localhost:8000/api/ready
 {"status":"ok"}
 ```
@@ -198,7 +198,7 @@ Priority of overriding configuration:
 2. environment variables
 3. gunicorn.py
 
-All application configuration is available in `fastapi_mvc_example.config` submodule.
+All application configuration is available in `example.config` submodule.
 
 ### Environment variables
 
@@ -209,7 +209,7 @@ All application configuration is available in `fastapi_mvc_example.config` submo
 | FASTAPI_BIND         | `"127.0.0.1:8000"`                                              | The socket to bind. A string of the form: 'HOST', 'HOST:PORT', 'unix:PATH'. An IP is a valid HOST.  |
 | FASTAPI_WORKERS      | `"2"`                                                           | Number of gunicorn workers (uvicorn.workers.UvicornWorker)     |
 | FASTAPI_DEBUG        | `"True"`                                                        | FastAPI logging level. You should disable this for production. |
-| FASTAPI_PROJECT_NAME | `"fastapi-mvc-example"`                               | FastAPI project name.                                          |
+| FASTAPI_PROJECT_NAME | `"example"`                               | FastAPI project name.                                          |
 | FASTAPI_VERSION      | `"0.4.0"`                                                       | Application version.                                           |
 | FASTAPI_DOCS_URL     | `"/"`                                                           | Path where swagger ui will be served at.                       |
 | FASTAPI_USE_REDIS    | `"False"`                                                       | Whether or not to use Redis.                                   |
@@ -228,16 +228,16 @@ All application configuration is available in `fastapi_mvc_example.config` submo
 
 ### gunicorn.conf.py
 
-1. Source: `fastapi_mvc_example.config/gunicorn.conf.py`
+1. Source: `example.config/gunicorn.conf.py`
 2. [Gunicorn configuration file documentation](https://docs.gunicorn.org/en/latest/settings.html)
 
 ### Routes definition
 
-Endpoints are defined in `fastapi_mvc_example.app.router`. Just simply import your controller and include it to FastAPI router:
+Endpoints are defined in `example.app.router`. Just simply import your controller and include it to FastAPI router:
 
 ```python
 from fastapi import APIRouter
-from fastapi_mvc_example.app.controllers.api.v1 import ready
+from example.app.controllers.api.v1 import ready
 
 root_api_router = APIRouter(
     prefix="/api"
@@ -248,13 +248,13 @@ root_api_router.include_router(ready.router, tags=["ready"])
 
 ## Development
 
-You can implement your own web routes logic straight away in `fastapi_mvc_example.app.controllers.api.v1` submodule. For more information please see [FastAPI documentation](https://fastapi.tiangolo.com/tutorial/).
+You can implement your own web routes logic straight away in `example.app.controllers.api.v1` submodule. For more information please see [FastAPI documentation](https://fastapi.tiangolo.com/tutorial/).
 
 ### Utilities
 
 For your discretion, I've provided some basic utilities:
-* RedisClient `fastapi_mvc_example.app.utils.redis`
-* AiohttpClient `fastapi_mvc_example.app.utils.aiohttp_client`
+* RedisClient `example.app.utils.redis`
+* AiohttpClient `example.app.utils.aiohttp_client`
 
 They're initialized in `asgi.py` on FastAPI startup event handler:
 
@@ -292,12 +292,12 @@ and are available for whole application scope without passing object instances. 
 
 Example:
 ```python
-from fastapi_mvc_example.app.utils import RedisClient
+from example.app.utils import RedisClient
 
 response = RedisClient.get("Key")
 ```
 ```python
-from fastapi_mvc_example.app.utils import AiohttpClient
+from example.app.utils import AiohttpClient
 
 response = AiohttpClient.get("http://foo.bar")
 ```
@@ -306,7 +306,7 @@ response = AiohttpClient.get("http://foo.bar")
 
 #### HTTPException and handler
 
-Source: `fastapi_mvc_example.app.exceptions.http.py`
+Source: `example.app.exceptions.http.py`
 
 This exception combined with `http_exception_handler` method allows you to use it the same manner as you'd use `FastAPI.HTTPException` with one difference. 
 You have freedom to define returned response body, whereas in `FastAPI.HTTPException` content is returned under "detail" JSON key.

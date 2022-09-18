@@ -28,16 +28,16 @@ let
     )
   ];
 
-  fastapi-mvc-example = pkgs.callPackage ./default.nix {
+  example = pkgs.callPackage ./default.nix {
     python = pkgs.python39;
     poetry2nix = pkgs.poetry2nix;
   };
 
-  pyEnv = fastapi-mvc-example.dependencyEnv;
+  pyEnv = example.dependencyEnv;
 in
 
 pkgs.dockerTools.buildImage {
-  name = "fastapi-mvc-example";
+  name = "example";
   tag = "0.1.0";
 
   contents = [
@@ -51,6 +51,6 @@ pkgs.dockerTools.buildImage {
 
   config = {
     User = "nonroot";
-    Entrypoint = [ "${pyEnv}/bin/fastapi-mvc-example" ];
+    Entrypoint = [ "${pyEnv}/bin/example" ];
   };
 }

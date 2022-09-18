@@ -11,10 +11,10 @@ poetry2nix.mkPoetryApplication rec {
   pyproject = ./pyproject.toml;
   poetrylock = ./poetry.lock;
 
-  pythonImportsCheck = [ "fastapi_mvc_example" ];
+  pythonImportsCheck = [ "example" ];
 
   meta = with lib; {
-    homepage = "https://github.com/rszamszur/fastapi-mvc-example";
+    homepage = "https://github.com/fastapi-mvc/example";
     description = "This project was generated with fastapi-mvc.";
   };
 }

@@ -1,4 +1,4 @@
-from fastapi_mvc_example.config import settings
+from example.config import settings
 
 
 def test_ready(app):

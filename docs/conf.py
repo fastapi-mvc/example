@@ -3,12 +3,12 @@
 # This file only contains a selection of the most common options. For a full
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
-from fastapi_mvc_example import __version__
+from example import __version__
 from pallets_sphinx_themes import ProjectLink
 
 # Project --------------------------------------------------------------
 
-project = "fastapi-mvc-example"
+project = "example"
 copyright = "2022, John Doe"
 author = "John Doe"
 release = __version__
@@ -43,7 +43,7 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 html_theme = "click"
 html_context = {
     "project_links": [
-        ProjectLink("Source Code", "https://github.com/rszamszur/fastapi-mvc-example"),
+        ProjectLink("Source Code", "https://github.com/fastapi-mvc/example"),
     ]
 }
 html_sidebars = {
@@ -52,6 +52,6 @@ html_sidebars = {
 }
 singlehtml_sidebars = {"index": ["project.html", "localtoc.html"]}
 html_logo = "_static/logo.png"
-html_title = f"fastapi-mvc-example Documentation ({__version__})"
+html_title = f"example Documentation ({__version__})"
 html_show_sourcelink = False
 html_static_path = ["_static"]

@@ -2,7 +2,7 @@ import mock
 import pytest
 from gunicorn.app.base import BaseApplication
 from gunicorn.errors import ConfigError
-from fastapi_mvc_example import ApplicationLoader
+from example import ApplicationLoader
 
 
 @mock.patch.object(BaseApplication, "run")

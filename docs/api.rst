@@ -6,94 +6,94 @@ This part of the documentation lists the full API reference of all classes and f
 WSGI
 ----
 
-.. autoclass:: fastapi_mvc_example.wsgi.ApplicationLoader
+.. autoclass:: example.wsgi.ApplicationLoader
    :members:
    :show-inheritance:
 
 Config
 ------
 
-.. automodule:: fastapi_mvc_example.config
+.. automodule:: example.config
 
-.. autoclass:: fastapi_mvc_example.config.application.Application
+.. autoclass:: example.config.application.Application
    :members:
    :show-inheritance:
 
-.. autoclass:: fastapi_mvc_example.config.redis.Redis
+.. autoclass:: example.config.redis.Redis
    :members:
    :show-inheritance:
 
-.. automodule:: fastapi_mvc_example.config.gunicorn
+.. automodule:: example.config.gunicorn
 
 CLI
 ---
 
-.. automodule:: fastapi_mvc_example.cli
+.. automodule:: example.cli
 
-.. autofunction:: fastapi_mvc_example.cli.cli.cli
+.. autofunction:: example.cli.cli.cli
 
-.. autofunction:: fastapi_mvc_example.cli.utils.validate_directory
+.. autofunction:: example.cli.utils.validate_directory
 
-.. autofunction:: fastapi_mvc_example.cli.serve.serve
+.. autofunction:: example.cli.serve.serve
 
 App
 ---
 
-.. automodule:: fastapi_mvc_example.app
+.. automodule:: example.app
 
-.. autofunction:: fastapi_mvc_example.app.asgi.on_startup
+.. autofunction:: example.app.asgi.on_startup
 
-.. autofunction:: fastapi_mvc_example.app.asgi.on_shutdown
+.. autofunction:: example.app.asgi.on_shutdown
 
-.. autofunction:: fastapi_mvc_example.app.asgi.get_application
+.. autofunction:: example.app.asgi.get_application
 
-.. automodule:: fastapi_mvc_example.app.router
+.. automodule:: example.app.router
 
 Controllers
 ~~~~~~~~~~~
 
-.. automodule:: fastapi_mvc_example.app.controllers
+.. automodule:: example.app.controllers
 
-.. autofunction:: fastapi_mvc_example.app.controllers.ready.readiness_check
+.. autofunction:: example.app.controllers.ready.readiness_check
 
 Models
 ~~~~~~
 
-.. automodule:: fastapi_mvc_example.app.models
+.. automodule:: example.app.models
 
 Views
 ~~~~~
 
-.. automodule:: fastapi_mvc_example.app.views
+.. automodule:: example.app.views
 
-.. autoclass:: fastapi_mvc_example.app.views.error.ErrorModel
+.. autoclass:: example.app.views.error.ErrorModel
    :members:
    :show-inheritance:
 
-.. autoclass:: fastapi_mvc_example.app.views.error.ErrorResponse
+.. autoclass:: example.app.views.error.ErrorResponse
    :members:
    :show-inheritance:
 
 Exceptions
 ~~~~~~~~~~
 
-.. automodule:: fastapi_mvc_example.app.exceptions
+.. automodule:: example.app.exceptions
 
-.. autoclass:: fastapi_mvc_example.app.exceptions.http.HTTPException
+.. autoclass:: example.app.exceptions.http.HTTPException
    :members:
    :show-inheritance:
 
-.. autofunction:: fastapi_mvc_example.app.exceptions.http.http_exception_handler
+.. autofunction:: example.app.exceptions.http.http_exception_handler
 
 Utils
 ~~~~~
 
-.. automodule:: fastapi_mvc_example.app.utils
+.. automodule:: example.app.utils
 
-.. autoclass:: fastapi_mvc_example.app.utils.aiohttp_client.AiohttpClient
+.. autoclass:: example.app.utils.aiohttp_client.AiohttpClient
    :members:
    :show-inheritance:
 
-.. autoclass:: fastapi_mvc_example.app.utils.redis.RedisClient
+.. autoclass:: example.app.utils.redis.RedisClient
    :members:
    :show-inheritance:

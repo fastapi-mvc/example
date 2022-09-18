@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 import pytest
 from pydantic.error_wrappers import ValidationError
-from fastapi_mvc_example.app.views.error import ErrorModel, ErrorResponse
+from example.app.views.error import ErrorModel, ErrorResponse
 
 
 @pytest.mark.parametrize(

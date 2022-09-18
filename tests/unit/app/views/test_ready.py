@@ -1,6 +1,6 @@
 import pytest
 from pydantic.error_wrappers import ValidationError
-from fastapi_mvc_example.app.views import ReadyResponse
+from example.app.views import ReadyResponse
 
 
 @pytest.mark.parametrize(

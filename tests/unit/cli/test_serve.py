@@ -2,7 +2,7 @@ import os
 
 import mock
 import pytest
-from fastapi_mvc_example.cli.serve import serve
+from example.cli.serve import serve
 
 
 current_dir = os.path.dirname(__file__)
@@ -74,8 +74,8 @@ def test_serve_help(cli_runner):
         ),
     ],
 )
-@mock.patch("fastapi_mvc_example.cli.serve.get_application")
-@mock.patch("fastapi_mvc_example.cli.serve.ApplicationLoader")
+@mock.patch("example.cli.serve.get_application")
+@mock.patch("example.cli.serve.ApplicationLoader")
 def test_serve_options(wsgi_mock, asgi_mock, cli_runner, opts, expected):
     result = cli_runner.invoke(serve, opts)
     assert result.exit_code == 0

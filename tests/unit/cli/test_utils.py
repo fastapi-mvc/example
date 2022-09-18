@@ -3,7 +3,7 @@ import os
 import mock
 import pytest
 from click import BadParameter
-from fastapi_mvc_example.cli.utils import validate_directory
+from example.cli.utils import validate_directory
 
 
 current_dir = os.path.dirname(__file__)
@@ -18,7 +18,7 @@ def test_validate_directory():
             mock.MagicMock(), mock.MagicMock(), "/path/does/not/exist"
         )
 
-    with mock.patch("fastapi_mvc_example.cli.utils.os.access") as mck:
+    with mock.patch("example.cli.utils.os.access") as mck:
         mck.return_value = False
 
         with pytest.raises(BadParameter):

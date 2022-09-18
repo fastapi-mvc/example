@@ -1,7 +1,7 @@
 import pytest
 import aiohttp
 from aioresponses import aioresponses
-from fastapi_mvc_example.app.utils import AiohttpClient
+from example.app.utils import AiohttpClient
 
 
 @pytest.mark.asyncio

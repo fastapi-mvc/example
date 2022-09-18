@@ -10,10 +10,10 @@ set -o pipefail
 
 if command -v docker &> /dev/null; then
   echo "[image] Found docker-engine, begin removing image."
-  docker rmi -f fastapi-mvc-example:"$TAG" || true
+  docker rmi -f example:"$TAG" || true
 elif command -v podman &> /dev/null; then
   echo "[image] Found podman container engine, begin removing image."
-  podman rmi -f fastapi-mvc-example:"$TAG" || true
+  podman rmi -f example:"$TAG" || true
 else
   echo "[image] Neither docker nor podman container engine found."
   exit 1

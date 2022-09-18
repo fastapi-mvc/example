@@ -1,4 +1,4 @@
-from fastapi_mvc_example.cli import cli
+from example.cli import cli
 
 
 def test_root(cli_runner):

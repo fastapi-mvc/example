@@ -1,7 +1,7 @@
 import pytest
 from fastapi.testclient import TestClient
-from fastapi_mvc_example.app import get_application
-from fastapi_mvc_example.config import settings
+from example.app import get_application
+from example.config import settings
 
 
 @pytest.fixture

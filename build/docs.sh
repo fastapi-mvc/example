@@ -10,5 +10,5 @@ set -o pipefail
 
 POETRY_HOME="${POETRY_HOME:=${HOME}/.local/share/pypoetry}"
 POETRY_BINARY="${POETRY_BINARY:=${POETRY_HOME}/venv/bin/poetry}"
-echo "[docs] Build fastapi-mvc-example documentation."
+echo "[docs] Build example documentation."
 "$POETRY_BINARY" run sphinx-build docs site

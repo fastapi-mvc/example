@@ -4,7 +4,7 @@ on:
   push:
   pull_request:
 # This trigger is required by fastapi-mvc automation to dispatch this concrete workflow
-# from fastapi-mvc 'CI workflow' (https://github.com/rszamszur/fastapi-mvc/actions/workflows/main.yml),
+# from fastapi-mvc 'CI workflow' (https://github.com/fastapi-mvc/fastapi-mvc/actions/workflows/main.yml),
 # and await its result. By no means should this be included in the template this file was generated from.
 # It's just a temporary monkey patch to fulfill the GH automation use case.
 # Feel free to remove it.
@@ -162,7 +162,7 @@ jobs:
           path: ${{ env.POETRY_HOME }}
           key: ${{ runner.os }}-3.9-${{ hashFiles('./pyproject.toml') }}-${{ hashFiles('./poetry.lock') }}
       - name: Run coverage
-        run: $POETRY_HOME/bin/poetry run pytest --cov=fastapi_mvc_example --cov-fail-under=70 --cov-report=xml --cov-report=term-missing tests
+        run: $POETRY_HOME/bin/poetry run pytest --cov=example --cov-fail-under=70 --cov-report=xml --cov-report=term-missing tests
       - name: Archive coverage artifacts
         uses: actions/upload-artifact@v2
         with:
