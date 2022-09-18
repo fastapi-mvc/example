@@ -16,6 +16,12 @@ on:
         required: true
         description: "Input required by codex-/return-dispatch@v1"
 
+env:
+  POETRY_HOME: /opt/poetry
+  POETRY_CONFIG_DIR: /opt/poetry
+  POETRY_CACHE_DIR: /opt/poetry/cache
+  POETRY_VIRTUALENVS_PATH: /opt/poetry/store
+
 jobs:
   build-docs:
     runs-on: ubuntu-latest
@@ -37,7 +43,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.POETRY_HOME }}
-          key: ${{ runner.os }}-3.9-${{ hashFiles('./pyproject.toml') }}-${{ hashFiles('./poetry.lock') }}
+          key: ${{ runner.os }}-3.9-${{ hashFiles('./pyproject.toml') }}
       - name: Build documentation
         run: make docs
       - name: Archive build artifacts
