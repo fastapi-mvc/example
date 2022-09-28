@@ -10,7 +10,7 @@ let
 in
 {
   # p2n-final & p2n-prev refers to poetry2nix
-  poetry2nix = poetry2nix.overrideScope' (p2n-final: p2n-prev: {
+  poetry2nix = p2n.overrideScope' (p2n-final: p2n-prev: {
 
     # py-final & py-prev refers to python packages
     defaultPoetryOverrides = p2n-prev.defaultPoetryOverrides.extend (py-final: py-prev: {
