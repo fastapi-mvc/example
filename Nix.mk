@@ -3,12 +3,12 @@ PYTHON_NIXPKG ?= python39
 .PHONY: build
 build:  ## Build example Nix package
 	echo "[nix][build] Build example Nix package."
-	@nix-build -E 'with import <nixpkgs> {}; callPackage ./default.nix {python = pkgs.${PYTHON_NIXPKG}; poetry2nix = pkgs.poetry2nix;}'
+	@nix-build -E 'with import <nixpkgs> { overlays = [ (import ./overlay.nix) ]; }; callPackage ./default.nix {python = pkgs.${PYTHON_NIXPKG}; poetry2nix = pkgs.poetry2nix;}'
 
 .PHONY: install
 install:  ## Install example env with Nix
 	echo "[nix][install] Install example env with Nix"
-	@nix-build -E 'with import <nixpkgs> {}; callPackage ./editable.nix {python = pkgs.${PYTHON_NIXPKG}; poetry2nix = pkgs.poetry2nix;}'
+	@nix-build -E 'with import <nixpkgs> { overlays = [ (import ./overlay.nix) ]; }; callPackage ./editable.nix {python = pkgs.${PYTHON_NIXPKG}; poetry2nix = pkgs.poetry2nix;}'
 
 .PHONY: image
 image:  ## Build example image with Nix
