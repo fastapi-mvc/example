@@ -33,9 +33,9 @@ jobs:
       # Feel free to remove it.
       - name: echo distinct ID ${{ github.event.inputs.distinct_id }}
         run: echo ${{ github.event.inputs.distinct_id }}
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.9
       - name: Load Poetry cache
@@ -47,7 +47,7 @@ jobs:
       - name: Build documentation
         run: make docs
       - name: Archive build artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ format('docs-{0}', github.sha) }}
           path: site
