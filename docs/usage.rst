@@ -43,6 +43,7 @@ WSGI + ASGI production server
 To run production unicorn + uvicorn (WSGI + ASGI) server you can use project CLI serve command:
 
 .. code-block:: bash
+
     example serve
     [2022-04-23 20:21:49 +0000] [4769] [INFO] Start gunicorn WSGI with ASGI workers.
     [2022-04-23 20:21:49 +0000] [4769] [INFO] Starting gunicorn 20.1.0
@@ -63,6 +64,7 @@ To run production unicorn + uvicorn (WSGI + ASGI) server you can use project CLI
 To confirm it's working:
 
 .. code-block:: bash
+
     $ curl localhost:8000/api/ready
     {"status":"ok"}
 
@@ -72,6 +74,7 @@ Dockerfile
 This project provides Dockerfile for containerized environment.
 
 .. code-block:: bash
+
     $ make image
     $ podman run -dit --name example -p 8000:8000 example:$(cat TAG)
     f41e5fa7ffd512aea8f1aad1c12157bf1e66f961aeb707f51993e9ac343f7a4b
@@ -95,6 +98,7 @@ Makefile
 Provided Makefile is a starting point for application and infrastructure development:
 
 .. code-block:: bash
+
     Usage:
       make <target>
       help             Display this help

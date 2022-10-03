@@ -40,8 +40,7 @@ Once development cluster is up and running you should see summary listing applic
 .. note::
     Above address may be different for your installation.
 
-.. note::
-    Provided virtualized env doesn't have port forwarding configured which means, that bootstrapped application stack in k8s won't be accessible on Host OS.*
+    Provided virtualized env doesn't have port forwarding configured which means, that bootstrapped application stack in k8s won't be accessible on Host OS.
 
 Deployed application stack in Kubernetes:
 
