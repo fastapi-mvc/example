@@ -12,13 +12,12 @@
 
 ### Documentation
 
-Example generated project documentation: [https://fastapi-mvc.github.io/example](https://fastapi-mvc.github.io/example)
 
 You should have documentation deployed to your project GitHub pages via [Build Docs workflow](https://github.com/fastapi-mvc/example/actions/workflows/docs.yml)
 
 **NOTE!** You might need to enable GitHub pages for this project first.
 
-Build documentation:
+To build manually:
 ```shell
 make docs
 ```

@@ -116,6 +116,7 @@ Utilities
 ~~~~~~~~~
 
 Available utilities:
+
 * RedisClient ``example.app.utils.redis``
 * AiohttpClient ``example.app.utils.aiohttp_client``
 
@@ -202,44 +203,65 @@ Environment variables
 
 **Application configuration**
 
-+-----------------------------+--------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| Key                         | Default                                                            | Description                                                                                        |
-+=============================+====================================================================+====================================================================================================+
-| FASTAPI_BIND                | ``"127.0.0.1:8000"``                                               | The socket to bind. A string of the form: 'HOST', 'HOST:PORT', 'unix:PATH'. An IP is a valid HOST. |
-+-----------------------------+--------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| FASTAPI_WORKERS             | ``"2"``                                                            | Number of gunicorn workers (uvicorn.workers.UvicornWorker.                                         |
-+-----------------------------+--------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| FASTAPI_DEBUG               | ``"True"``                                                         | FastAPI logging level. You should disable this for production.                                     |
-+-----------------------------+--------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| FASTAPI_PROJECT_NAME        | ``"example"``                                | FastAPI project name.                                                                              |
-+-----------------------------+--------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| FASTAPI_VERSION             | ``"0.4.0"``                                                        | Application version.                                                                               |
-+-----------------------------+--------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| FASTAPI_DOCS_URL            | ``"/"``                                                            | Path where swagger ui will be served at.                                                           |
-+-----------------------------+--------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| FASTAPI_USE_REDIS           | ``"False"``                                                        | Whether or not to use Redis.                                                                       |
-+-----------------------------+--------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| FASTAPI_GUNICORN_LOG_LEVEL  | ``"info"``                                                         | The granularity of gunicorn log output                                                             |
-+-----------------------------+--------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+
-| FASTAPI_GUNICORN_LOG_FORMAT | ``'%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'``  | Gunicorn log format                                                                                |
-+-----------------------------+--------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+
+.. list-table::
+   :widths: 25 25 50
+   :header-rows: 1
 
+   * - Key
+     - Default
+     - Description
+   * - FASTAPI_BIND
+     - ``"127.0.0.1:8000"``
+     - The socket to bind. A string of the form: 'HOST', 'HOST:PORT', 'unix:PATH'. An IP is a valid HOST.
+   * - FASTAPI_WORKERS
+     - ``"2"``
+     - Number of gunicorn workers (uvicorn.workers.UvicornWorker).
+   * - FASTAPI_DEBUG
+     - ``"True"``
+     - FastAPI logging level. You should disable this for production.
+   * - FASTAPI_PROJECT_NAME
+     - ``"example"``
+     - FastAPI project name.
+   * - FASTAPI_VERSION
+     - ``"0.1.0"``
+     - Application version.
+   * - FASTAPI_DOCS_URL
+     - ``"/"``
+     - Path where swagger ui will be served at.
+   * - FASTAPI_USE_REDIS
+     - ``"False"``
+     - Whether or not to use Redis.
+   * - FASTAPI_GUNICORN_LOG_LEVEL
+     - ``"info"``
+     - The granularity of gunicorn log output.
+   * - FASTAPI_GUNICORN_LOG_FORMAT
+     - ``'%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'``
+     - Gunicorn log format.
 
 **Redis configuration**
 
-+-----------------------------+------------------+--------------------------------------------+
-| Key                         | Default          | Description                                |
-+=============================+==================+============================================+
-| FASTAPI_REDIS_HOTS          | ``"127.0.0.1"``  | Redis host.                                |
-+-----------------------------+------------------+--------------------------------------------+
-| FASTAPI_REDIS_PORT          | ``"6379"``       | Redis port.                                |
-+-----------------------------+------------------+--------------------------------------------+
-| FASTAPI_REDIS_USERNAME      | ``""``           | Redis username.                            |
-+-----------------------------+------------------+--------------------------------------------+
-| FASTAPI_REDIS_PASSWORD      | ``""``           | Redis password.                            |
-+-----------------------------+------------------+--------------------------------------------+
-| FASTAPI_REDIS_USE_SENTINEL  | ``"False"``      | If provided Redis config is for Sentinel.  |
-+-----------------------------+------------------+--------------------------------------------+
+.. list-table::
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Key
+     - Default
+     - Description
+   * - FASTAPI_REDIS_HOTS
+     - ``"127.0.0.1"``
+     - Redis host.
+   * - FASTAPI_REDIS_PORT
+     - ``"6379"``
+     - Redis port.
+   * - FASTAPI_REDIS_USERNAME
+     - ``""``
+     - Redis username.
+   * - FASTAPI_REDIS_PASSWORD
+     - ``""``
+     - Redis password.
+   * - FASTAPI_REDIS_USE_SENTINEL
+     - ``"False"``
+     - If provided Redis config is for Sentinel.
 
 Gunicorn
 ~~~~~~~~
