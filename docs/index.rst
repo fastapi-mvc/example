@@ -90,11 +90,10 @@ This part of the documentation guides you through all of the features and usage.
 .. toctree::
    :maxdepth: 2
 
-    install
-    nix
-    usage
-    deployment
-
+   install
+   nix
+   usage
+   deployment
 
 API Reference
 -------------
