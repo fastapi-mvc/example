@@ -1,6 +1,6 @@
 import os
+from unittest import mock
 
-import mock
 import pytest
 from click import BadParameter
 from example.cli.utils import validate_directory

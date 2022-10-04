@@ -1,4 +1,5 @@
-import mock
+from unittest import mock
+
 from example.config import settings
 from example.app.router import root_api_router
 from example.app.asgi import (

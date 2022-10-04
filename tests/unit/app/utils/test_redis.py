@@ -1,4 +1,5 @@
-import mock
+from unittest import mock
+
 import pytest
 from aioredis import Redis
 from aioredis.exceptions import RedisError
