@@ -50,6 +50,10 @@ in
         '';
       });
 
+      fastapi = py-prev.fastapi.overridePythonAttrs (old: {
+        buildInputs = old.buildInputs or [ ] ++ [ py-final.hatchling ];
+      });
+
     });
 
   });
