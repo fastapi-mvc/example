@@ -35,6 +35,14 @@ in
         buildInputs = old.buildInputs or [ ] ++ [ py-final.flit-core ];
       });
 
+      idna = py-prev.idna.overridePythonAttrs (old: {
+        buildInputs = old.buildInputs or [ ] ++ [ py-final.flit-core ];
+      });
+
+      sphinx = py-prev.sphinx.overridePythonAttrs (old: {
+        buildInputs = old.buildInputs or [ ] ++ [ py-final.flit-core ];
+      });
+
       uvicorn = py-prev.uvicorn.overridePythonAttrs (old: {
         buildInputs = old.buildInputs or [ ] ++ [ py-final.hatchling ];
         postPatch = ''
