@@ -13,4 +13,4 @@ Resources:
 from example.cli.cli import cli
 
 
-__all__ = ("cli",)
+__all__ = ("cli.py.jinja",)

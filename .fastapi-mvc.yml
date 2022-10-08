@@ -1,0 +1,21 @@
+# Changes here will be overwritten by Copier
+_commit: c8b7f60
+_src_path: .
+aiohttp: true
+author: Radosław Szamszur
+chart_name: example
+container_image_name: example
+copyright_date: 2022
+email: github@rsd.sh
+fastapi_mvc_version: Generated from CI
+github_actions: true
+helm: true
+license: mit
+nix: true
+package_name: example
+project_description: This project was generated with fastapi-mvc.
+project_name: example
+redis: true
+repo_url: https://github.com/fastapi-mvc/example
+script_name: example
+version: 0.1.0

@@ -4,7 +4,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ![GitHub](https://img.shields.io/badge/fastapi-v.0.85.0-blue)
 ![GitHub](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10-blue)
-![GitHub](https://img.shields.io/badge/license-MIT-blue)
+![GitHub](https://img.shields.io/badge/license-mit-blue)
 
 ---
 
@@ -26,4 +26,4 @@ Then open `./site/index.html` with any browser.
 
 ## License
 
-This project is licensed under the terms of the MIT license.
+This project is licensed under the terms of the mit license.

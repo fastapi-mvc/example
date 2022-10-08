@@ -15,10 +15,6 @@ install:  ## Install example with poetry
 image:  ## Build example image
 	@build/image.sh
 
-.PHONY: clean-image
-clean-image:  ## Clean example image
-	@build/clean-image.sh
-
 .PHONY: metrics
 metrics: install ## Run example metrics checks
 	echo "[metrics] Run example PEP 8 checks."

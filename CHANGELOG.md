@@ -4,4 +4,4 @@ This file documents changes to [example](https://github.com/fastapi-mvc/example)
 
 ## 0.1.0
 
-- [X] Initial release
+* Initial release

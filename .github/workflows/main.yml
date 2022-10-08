@@ -1,14 +1,6 @@
 name: CI
 
 on:
-  # This trigger is required by fastapi-mvc automation to dispatch this concrete workflow
-  # from fastapi-mvc 'CI workflow' (https://github.com/fastapi-mvc/cookiecutter/actions/workflows/main.yml),
-  # and await its result. NOTE! This is not included in the template.
-  workflow_dispatch:
-    inputs:
-      distinct_id:
-        required: true
-        description: "Input required by codex-/return-dispatch@v1"
   push:
   pull_request:
 
@@ -19,14 +11,6 @@ env:
   POETRY_VIRTUALENVS_PATH: /opt/poetry/store
 
 jobs:
-  meta:
-    runs-on: ubuntu-latest
-
-    steps:
-      # This echo is required by codex-/return-dispatch@v1 in order to identify dispatched workflow.
-      # NOTE! This is not included in the template.
-      - name: echo distinct ID ${{ github.event.inputs.distinct_id }}
-        run: echo ${{ github.event.inputs.distinct_id }}
   # This job checks if an identical workflow is being triggered by different
   # event and skips it. For instance there is no need to run the same pipeline
   # twice for pull_request and push for identical commit sha.
@@ -166,4 +150,4 @@ jobs:
           path: ${{ env.POETRY_HOME }}
           key: ${{ runner.os }}-3.9-${{ hashFiles('./pyproject.toml') }}-{{ hashFiles('./poetry.lock') }}
       - name: Run coverage
-        run: $POETRY_HOME/bin/poetry run pytest --cov=example --cov-fail-under=70 --cov-report=xml --cov-report=term-missing tests
+        run: make coverage
