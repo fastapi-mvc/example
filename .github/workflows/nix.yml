@@ -95,7 +95,5 @@ jobs:
         run: nix-env -i gnumake -f '<nixpkgs>'
       - name: Run metrics checks
         run: make metrics
-      - name: Run unit-tests
-        run: make unit-test
-      - name: Run integration-tests
-        run: make integration-test
+      - name: Run test
+        run: make test
