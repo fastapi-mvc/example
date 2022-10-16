@@ -113,4 +113,4 @@ Miscellaneous Pages
    :maxdepth: 2
 
    license
-   CHANGELOG.md
+   changelog
