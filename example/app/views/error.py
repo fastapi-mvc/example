@@ -25,6 +25,7 @@ class ErrorModel(BaseModel):
     details: Optional[List[Dict[str, Any]]]
 
     @root_validator(pre=False, skip_on_failure=True)
+    @classmethod
     def _set_status(cls, values: dict) -> dict:
         """Set the status field value based on the code attribute value.
 
