@@ -54,6 +54,10 @@ in
         buildInputs = old.buildInputs or [ ] ++ [ py-final.hatchling ];
       });
 
+      black = py-prev.black.overridePythonAttrs (old: {
+        buildInputs = old.buildInputs or [ ] ++ [ py-final.hatchling ];
+      });
+
     });
 
   });
