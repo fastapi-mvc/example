@@ -49,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: cachix/install-nix-action@v17
+      - uses: cachix/install-nix-action@v18
         with:
           nix_path: ${{ env.NIX_CHANNEL }}
       - uses: actions/checkout@v3
@@ -63,7 +63,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install Nix ❄️
-        uses: cachix/install-nix-action@v17
+        uses: cachix/install-nix-action@v18
         with:
           extra_nix_config: "system-features = nixos-test benchmark big-parallel kvm"
           nix_path: ${{ env.NIX_CHANNEL }}
@@ -95,7 +95,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install Nix
-        uses: cachix/install-nix-action@v17
+        uses: cachix/install-nix-action@v18
         with:
           nix_path: ${{ env.NIX_CHANNEL }}
       # Remove bellow step if you do not want to use Cachix - Nix binary cache.
