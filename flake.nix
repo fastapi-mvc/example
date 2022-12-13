@@ -44,7 +44,7 @@
         } // pkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
           image = pkgs.callPackage ./image.nix {
             inherit pkgs;
-            example = pkgs.example;
+            app = pkgs.example;
           };
         };
 

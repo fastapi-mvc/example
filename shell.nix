@@ -10,7 +10,6 @@ pkgs.mkShell {
   buildInputs = [
     pkgs.gnumake
     pkgs.curl
-    pkgs.git
     pythonPackage
     poetry
   ];

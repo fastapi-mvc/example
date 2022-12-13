@@ -9,6 +9,14 @@ final: prev: {
         buildInputs = old.buildInputs or [ ] ++ [ py-final.flit-core ];
       });
 
+      flake8-todo = py-prev.flake8-todo.overridePythonAttrs (old: {
+        buildInputs = old.buildInputs or [ ] ++ [ py-final.setuptools ];
+      });
+
+      packaging = py-prev.packaging.overridePythonAttrs (old: {
+        buildInputs = old.buildInputs or [ ] ++ [ py-final.flit-core ];
+      });
+
     });
 
   });

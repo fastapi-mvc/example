@@ -67,9 +67,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ '38', '39', '310', '311' ]
-        os: [ubuntu-latest, macos-12]
-    runs-on: ${{ matrix.os }}
+        python-version: [ '38', '39', '310' ]
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
