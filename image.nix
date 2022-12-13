@@ -1,22 +1,21 @@
-{ pkgs ? import <nixpkgs> { overlays = [ (import ./overlay.nix) ]; }
+{ pkgs ? import <nixpkgs> { }
+, example
 , name ? "example"
 , tag ? "latest"
 }:
 
-let
-  app = pkgs.callPackage ./default.nix {
-    python = pkgs.python39;
-    poetry2nix = pkgs.poetry2nix;
-  };
-in
 pkgs.dockerTools.buildImage {
   inherit name tag;
 
-  contents = [
-    app
-    pkgs.cacert
-    pkgs.tzdata
-  ];
+  copyToRoot = pkgs.buildEnv {
+    name = "image-root";
+    paths = [
+      example
+      pkgs.cacert
+      pkgs.tzdata
+    ];
+    pathsToLink = [ "/bin" ];
+  };
 
   runAsRoot = ''
     #!${pkgs.runtimeShell}
