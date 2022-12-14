@@ -35,7 +35,7 @@ hiredis = ["hiredis (>=1.0)"]
 
 [[package]]
 name = "aioresponses"
-version = "0.7.3"
+version = "0.7.4"
 description = "Mock out requests made by ClientSession from aiohttp package"
 category = "dev"
 optional = false
@@ -1023,8 +1023,8 @@ aioredis = [
     {file = "aioredis-2.0.1.tar.gz", hash = "sha256:eaa51aaf993f2d71f54b70527c440437ba65340588afeb786cd87c55c89cd98e"},
 ]
 aioresponses = [
-    {file = "aioresponses-0.7.3-py2.py3-none-any.whl", hash = "sha256:7b1897169062c92fa87d6ecc503ac566ac87fbfacb2504f8ca81c8035a2eb068"},
-    {file = "aioresponses-0.7.3.tar.gz", hash = "sha256:2c64ed5710ee8cb4e958c569184dad12f4c9cd5939135cb38f88c6a8261cceb3"},
+    {file = "aioresponses-0.7.4-py2.py3-none-any.whl", hash = "sha256:1160486b5ea96fcae6170cf2bdef029b9d3a283b7dbeabb3d7f1182769bfb6b7"},
+    {file = "aioresponses-0.7.4.tar.gz", hash = "sha256:9b8c108b36354c04633bad0ea752b55d956a7602fe3e3234b939fc44af96f1d8"},
 ]
 aiosignal = [
     {file = "aiosignal-1.3.1-py3-none-any.whl", hash = "sha256:f8376fb07dd1e86a584e4fcdec80b36b7f81aac666ebc724e2c090300dd83b17"},

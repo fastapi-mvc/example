@@ -8,31 +8,34 @@ Prerequisites:
 
 * Nix 2.8.x or later installed `(How to install Nix) <https://nixos.org/download.html>`__
 
-First configure Nix channel if needed:
+First `enable Nix flakes <https://nixos.wiki/wiki/Flakes#Enable_flakes>`__ if needed.
+
+Optionally `setup fastapi-mvc Nix binary cache <https://app.cachix.org/cache/fastapi-mvc#pull>`__ to speed up the build process:
 
 .. code-block:: bash
 
-    nix-channel --add https://nixos.org/channels/nixos-22.05
-    nix-channel --update
+    nix-env -iA cachix -f https://cachix.org/api/v1/install
+    cachix use fastapi-mvc
 
-Next install make via Nix:
-
-.. code-block:: bash
-
-    nix-env --install gnumake
-    # If you do not want to install make to your profile, one can always use it ad-hoc via nix-shell
-    nix-shell -p gnumake
-
-Lastly, use ``make install`` target:
+To build default package run:
 
 .. code-block:: bash
 
-    make install
-    # Or
-    nix-shell -p gnumake --run "make install"
+    nix build .#default
 
-Or using Nix directly, should you choose:
+Or with concrete Python version, should you choose:
 
 .. code-block:: bash
 
-    nix-build -E 'with import <nixpkgs> { overlays = [ (import ./overlay.nix) ]; }; callPackage ./editable.nix {python = pkgs.python310; poetry2nix = pkgs.poetry2nix;}'
+    # Build with Python38
+    nix build .#example-py38
+    # Build with Python39
+    nix build .#example-py39
+    # Build with Python310
+    nix build .#example-py310
+
+Lastly, to spawn shell for development environment run:
+
+.. code-block:: bash
+
+    nix develop .#default
