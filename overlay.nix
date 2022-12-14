@@ -9,6 +9,10 @@ final: prev: {
         buildInputs = old.buildInputs or [ ] ++ [ py-final.flit-core ];
       });
 
+      pydantic = py-prev.pydantic.overrideAttrs (old: {
+        buildInputs = old.buildInputs or [ ] ++ [ final.libxcrypt ];
+      });
+
       flake8-todo = py-prev.flake8-todo.overridePythonAttrs (old: {
         buildInputs = old.buildInputs or [ ] ++ [ py-final.setuptools ];
       });

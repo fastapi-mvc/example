@@ -68,7 +68,7 @@
               echo "[nix][metrics] Run example open TODO checks."
               flake8 --select=T --statistics --count example tests
               echo "[nix][metrics] Run example black checks."
-              black --check example
+              black -l 80 --check example
             '');
           };
           docs = {
