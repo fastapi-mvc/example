@@ -52,6 +52,14 @@ jobs:
       - uses: cachix/install-nix-action@v18
         with:
           nix_path: ${{ env.NIX_CHANNEL }}
+      # Remove bellow step if you do not want to use Cachix - Nix binary cache.
+      # For OpenSource projects there is free 5GB of storage.
+      # https://www.cachix.org
+      - name: Setup Cachix ❄️
+        uses: cachix/cachix-action@v12
+        with:
+          name: fastapi-mvc
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - uses: actions/checkout@v3
       - name: Check format
         run: nix-shell -p nixpkgs-fmt --run 'nixpkgs-fmt --check .'
