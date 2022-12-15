@@ -1,8 +1,7 @@
 from unittest import mock
 
 import pytest
-from aioredis import Redis
-from aioredis.exceptions import RedisError
+from redis import asyncio as aioredis
 from example.app.utils import RedisClient
 from example.config import redis as redis_conf
 
@@ -25,7 +24,7 @@ def test_open_redis_client():
     redis_conf.REDIS_PASSWORD = "Secret"
     redis_conf.REDIS_USE_SENTINEL = True
     RedisClient.open_redis_client()
-    assert isinstance(RedisClient.redis_client, Redis)
+    assert isinstance(RedisClient.redis_client, aioredis.Redis)
     RedisClient.redis_client = None
 
 
@@ -39,7 +38,7 @@ async def test_ping():
 @pytest.mark.asyncio
 async def test_ping_exception():
     RedisClient.redis_client = mock.MagicMock()
-    RedisClient.redis_client.ping.side_effect = RedisError("Mock error")
+    RedisClient.redis_client.ping.side_effect = aioredis.RedisError("Mock error")
     assert await RedisClient.ping() is False
 
 
@@ -53,8 +52,8 @@ async def test_set():
 @pytest.mark.asyncio
 async def test_set_exception():
     RedisClient.redis_client = mock.MagicMock()
-    RedisClient.redis_client.set.side_effect = RedisError("Mock error")
-    with pytest.raises(RedisError):
+    RedisClient.redis_client.set.side_effect = aioredis.RedisError("Mock error")
+    with pytest.raises(aioredis.RedisError):
         await RedisClient.set("key", "value")
 
 
@@ -68,8 +67,8 @@ async def test_rpush():
 @pytest.mark.asyncio
 async def test_rpush_exception():
     RedisClient.redis_client = mock.MagicMock()
-    RedisClient.redis_client.rpush.side_effect = RedisError("Mock error")
-    with pytest.raises(RedisError):
+    RedisClient.redis_client.rpush.side_effect = aioredis.RedisError("Mock error")
+    with pytest.raises(aioredis.RedisError):
         await RedisClient.rpush("key", "value")
 
 
@@ -83,8 +82,8 @@ async def test_exists():
 @pytest.mark.asyncio
 async def test_exists_exception():
     RedisClient.redis_client = mock.MagicMock()
-    RedisClient.redis_client.exists.side_effect = RedisError("Mock error")
-    with pytest.raises(RedisError):
+    RedisClient.redis_client.exists.side_effect = aioredis.RedisError("Mock error")
+    with pytest.raises(aioredis.RedisError):
         await RedisClient.exists("key")
 
 
@@ -98,8 +97,8 @@ async def test_get():
 @pytest.mark.asyncio
 async def test_get_exception():
     RedisClient.redis_client = mock.MagicMock()
-    RedisClient.redis_client.get.side_effect = RedisError("Mock error")
-    with pytest.raises(RedisError):
+    RedisClient.redis_client.get.side_effect = aioredis.RedisError("Mock error")
+    with pytest.raises(aioredis.RedisError):
         await RedisClient.get("key")
 
 
@@ -113,6 +112,6 @@ async def test_lrange():
 @pytest.mark.asyncio
 async def test_lrange_exception():
     RedisClient.redis_client = mock.MagicMock()
-    RedisClient.redis_client.lrange.side_effect = RedisError("Mock error")
-    with pytest.raises(RedisError):
+    RedisClient.redis_client.lrange.side_effect = aioredis.RedisError("Mock error")
+    with pytest.raises(aioredis.RedisError):
         await RedisClient.lrange("key", 1, -1)
