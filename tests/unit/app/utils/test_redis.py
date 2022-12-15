@@ -17,7 +17,7 @@ mock.MagicMock.__await__ = lambda x: async_magic().__await__()
 
 def test_open_redis_client():
     RedisClient.open_redis_client()
-    assert isinstance(RedisClient.redis_client, Redis)
+    assert isinstance(RedisClient.redis_client, aioredis.Redis)
     RedisClient.redis_client = None
 
     redis_conf.REDIS_USERNAME = "John"
