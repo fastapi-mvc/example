@@ -1,9 +1,7 @@
 """Redis client class utility."""
 import logging
 
-import aioredis
-import aioredis.sentinel
-from aioredis.exceptions import RedisError
+from redis import asyncio as aioredis
 from example.config import redis as redis_conf
 
 
@@ -88,7 +86,7 @@ class RedisClient(object):
         cls.log.debug("Execute Redis PING command")
         try:
             return await redis_client.ping()
-        except RedisError as ex:
+        except aioredis.RedisError as ex:
             cls.log.exception(
                 "Redis PING command finished with exception",
                 exc_info=(type(ex), ex, ex.__traceback__),
@@ -119,7 +117,7 @@ class RedisClient(object):
         cls.log.debug(f"Execute Redis SET command, key: {key}, value: {value}")
         try:
             await redis_client.set(key, value)
-        except RedisError as ex:
+        except aioredis.RedisError as ex:
             cls.log.exception(
                 "Redis SET command finished with exception",
                 exc_info=(type(ex), ex, ex.__traceback__),
@@ -153,7 +151,7 @@ class RedisClient(object):
         )
         try:
             await redis_client.rpush(key, value)
-        except RedisError as ex:
+        except aioredis.RedisError as ex:
             cls.log.exception(
                 "Redis RPUSH command finished with exception",
                 exc_info=(type(ex), ex, ex.__traceback__),
@@ -181,7 +179,7 @@ class RedisClient(object):
         cls.log.debug(f"Execute Redis EXISTS command, key: {key}")
         try:
             return await redis_client.exists(key)
-        except RedisError as ex:
+        except aioredis.RedisError as ex:
             cls.log.exception(
                 "Redis EXISTS command finished with exception",
                 exc_info=(type(ex), ex, ex.__traceback__),
@@ -211,7 +209,7 @@ class RedisClient(object):
         cls.log.debug(f"Execute Redis GET command, key: {key}")
         try:
             return await redis_client.get(key)
-        except RedisError as ex:
+        except aioredis.RedisError as ex:
             cls.log.exception(
                 "Redis GET command finished with exception",
                 exc_info=(type(ex), ex, ex.__traceback__),
@@ -248,7 +246,7 @@ class RedisClient(object):
         )
         try:
             return await redis_client.lrange(key, start, end)
-        except RedisError as ex:
+        except aioredis.RedisError as ex:
             cls.log.exception(
                 "Redis LRANGE command finished with exception",
                 exc_info=(type(ex), ex, ex.__traceback__),
