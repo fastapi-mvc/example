@@ -50,3 +50,14 @@ example = 'example.cli:cli'
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.coverage.run]
+omit = [
+    "example/config/gunicorn.py",
+    "example/__main__.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pass",
+]

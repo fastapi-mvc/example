@@ -62,7 +62,7 @@ integration-test: install ## Run example integration tests
 .PHONY: coverage
 coverage: install  ## Run example tests coverage
 	echo "[coverage] Run example tests coverage."
-	${POETRY_BINARY} run pytest --cov-config=.coveragerc --cov=example --cov-fail-under=90 --cov-report=xml --cov-report=term-missing tests
+	${POETRY_BINARY} run pytest --cov=example --cov-fail-under=90 --cov-report=xml --cov-report=term-missing tests
 
 .PHONY: test
 test: unit-test integration-test  ## Run example tests

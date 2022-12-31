@@ -6,24 +6,40 @@ from click import BadParameter
 from example.cli.utils import validate_directory
 
 
-current_dir = os.path.dirname(__file__)
+class TestValidateDirectory:
 
-
-def test_validate_directory():
-    result = validate_directory(mock.MagicMock(), mock.MagicMock(), current_dir)
-    assert result == current_dir
-
-    with pytest.raises(BadParameter):
-        validate_directory(
-            mock.MagicMock(), mock.MagicMock(), "/path/does/not/exist"
+    def test_should_return_original_value(self):
+        # given / when
+        path = os.path.dirname(__file__)
+        result = validate_directory(
+            mock.Mock(),
+            mock.Mock(),
+            path,
         )
 
-    with mock.patch("example.cli.utils.os.access") as mck:
-        mck.return_value = False
+        # then
+        assert result == path
 
+    def test_should_raise_when_path_not_exists(self):
+        # given
+        path = "/path/does/not/exist"
+
+        # when / then
         with pytest.raises(BadParameter):
             validate_directory(
-                mock.MagicMock(), mock.MagicMock(), os.path.abspath(__file__)
+                mock.Mock(),
+                mock.Mock(),
+                path,
             )
 
-        mck.assert_called_once_with(current_dir, os.W_OK)
+    def test_should_raise_when_path_not_writable(self):
+        # given
+        path = "/etc"
+
+        # when / then
+        with pytest.raises(BadParameter):
+            validate_directory(
+                mock.Mock(),
+                mock.Mock(),
+                path,
+            )

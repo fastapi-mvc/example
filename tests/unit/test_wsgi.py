@@ -1,67 +1,53 @@
-from unittest import mock
-
 import pytest
-from gunicorn.app.base import BaseApplication
-from gunicorn.errors import ConfigError
 from example import ApplicationLoader
 
 
-@mock.patch.object(BaseApplication, "run")
-def test_wsgi_conf_defaults(run_mock):
-    app = mock.Mock()
-    wsgi = ApplicationLoader(app)
-    assert wsgi.load() == app
-    assert wsgi.cfg.worker_class_str == "uvicorn.workers.UvicornWorker"
+class TestApplicationLoader:
 
-    assert wsgi.cfg.address == [("127.0.0.1", 8000)]
-    assert wsgi.cfg.env == {}
+    def test_should_create_wsgi_and_populate_defaults(self, asgi_app):
+        # given / when
+        wsgi = ApplicationLoader(asgi_app)
 
-    assert wsgi.cfg.settings["bind"].value == ["127.0.0.1:8000"]
-    assert wsgi.cfg.settings["raw_env"].value == []
-    assert wsgi.cfg.settings["workers"].value == 2
-    assert not wsgi.cfg.settings["daemon"].value
-    assert not wsgi.cfg.settings["pidfile"].value
+        # then
+        assert wsgi.load() == asgi_app
+        assert wsgi.cfg.worker_class_str == "uvicorn.workers.UvicornWorker"
+        assert wsgi.cfg.address == [("127.0.0.1", 8000)]
+        assert wsgi.cfg.env == {}
+        assert wsgi.cfg.settings["bind"].value == ["127.0.0.1:8000"]
+        assert wsgi.cfg.settings["raw_env"].value == []
+        assert wsgi.cfg.settings["workers"].value == 2
+        assert not wsgi.cfg.settings["daemon"].value
+        assert not wsgi.cfg.settings["pidfile"].value
 
-    wsgi.run()
-    run_mock.assert_called_once()
-
-
-@mock.patch.object(BaseApplication, "run")
-def test_wsgi_cli_overrides(run_mock):
-    app = mock.Mock()
-    wsgi = ApplicationLoader(
-        application=app,
-        overrides={
-            "raw_env": ("FOOBAR=123",),
-            "bind": "0.0.0.0:3000",
-            "workers": 3,
-            "daemon": True,
-            "pidfile": "/tmp/api.pid"
-        }
-    )
-    # Test unused patched method for coverage sake.
-    wsgi.init(None, None, None)
-
-    assert wsgi.cfg.address == [("0.0.0.0", 3000)]
-    assert wsgi.cfg.env == {"FOOBAR": "123"}
-
-    assert wsgi.cfg.settings["bind"].value == ["0.0.0.0:3000"]
-    assert wsgi.cfg.settings["raw_env"].value == ["FOOBAR=123"]
-    assert wsgi.cfg.settings["workers"].value == 3
-    assert wsgi.cfg.settings["daemon"].value
-    assert wsgi.cfg.settings["pidfile"].value == "/tmp/api.pid"
-
-    wsgi.run()
-    run_mock.assert_called_once()
-
-
-def test_wsgi_bad_config():
-    app = mock.Mock()
-    with pytest.raises(SystemExit):
-        ApplicationLoader(
-            application=app,
+    def test_should_create_wsgi_and_override_config(self, asgi_app):
+        # given / when
+        wsgi = ApplicationLoader(
+            application=asgi_app,
             overrides={
-                "unknown": True,
-                "workers": None,
+                "raw_env": ("FOOBAR=123",),
+                "bind": "0.0.0.0:3000",
+                "workers": 3,
+                "daemon": True,
+                "pidfile": "/tmp/api.pid"
             }
         )
+
+        # then
+        assert wsgi.cfg.address == [("0.0.0.0", 3000)]
+        assert wsgi.cfg.env == {"FOOBAR": "123"}
+        assert wsgi.cfg.settings["bind"].value == ["0.0.0.0:3000"]
+        assert wsgi.cfg.settings["raw_env"].value == ["FOOBAR=123"]
+        assert wsgi.cfg.settings["workers"].value == 3
+        assert wsgi.cfg.settings["daemon"].value
+        assert wsgi.cfg.settings["pidfile"].value == "/tmp/api.pid"
+
+    def test_should_raise_when_invalid_override_given(self, asgi_app):
+        # given
+        overrides = {
+            "unknown": True,
+            "workers": None,
+        }
+
+        # when / then
+        with pytest.raises(SystemExit):
+            ApplicationLoader(application=asgi_app, overrides=overrides)

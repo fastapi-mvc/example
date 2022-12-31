@@ -116,7 +116,7 @@ class RedisClient(object):
 
         cls.log.debug(f"Execute Redis SET command, key: {key}, value: {value}")
         try:
-            await redis_client.set(key, value)
+            return await redis_client.set(key, value)
         except aioredis.RedisError as ex:
             cls.log.exception(
                 "Redis SET command finished with exception",
@@ -150,7 +150,7 @@ class RedisClient(object):
             f"Execute Redis RPUSH command, key: {key}, value: {value}"
         )
         try:
-            await redis_client.rpush(key, value)
+            return await redis_client.rpush(key, value)
         except aioredis.RedisError as ex:
             cls.log.exception(
                 "Redis RPUSH command finished with exception",
