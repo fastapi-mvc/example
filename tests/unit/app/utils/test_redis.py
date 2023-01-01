@@ -1,5 +1,4 @@
 from unittest import mock
-from asyncio import Future
 
 import pytest
 from redis import asyncio as aioredis
@@ -11,7 +10,7 @@ class TestRedisClient:
 
     @pytest.fixture
     def async_mock(self):
-        yield mock.MagicMock(return_value=Future())
+        yield mock.AsyncMock()
 
     def test_should_create_client_and_populate_defaults(self):
         # given / when
@@ -58,7 +57,7 @@ class TestRedisClient:
         # given
         RedisClient.open_redis_client()
         RedisClient.redis_client.ping = async_mock
-        async_mock.return_value.set_result(True)
+        async_mock.return_value = True
 
         # when
         result = await RedisClient.ping()
@@ -85,7 +84,7 @@ class TestRedisClient:
         # given
         RedisClient.open_redis_client()
         RedisClient.redis_client.set = async_mock
-        async_mock.return_value.set_result("OK")
+        async_mock.return_value = "OK"
 
         # when
         result = await RedisClient.set("key", "value")
@@ -110,7 +109,7 @@ class TestRedisClient:
         # given
         RedisClient.open_redis_client()
         RedisClient.redis_client.rpush = async_mock
-        async_mock.return_value.set_result(10)
+        async_mock.return_value = 10
 
         # when
         result = await RedisClient.rpush("key", "value")
@@ -135,7 +134,7 @@ class TestRedisClient:
         # given
         RedisClient.open_redis_client()
         RedisClient.redis_client.exists = async_mock
-        async_mock.return_value.set_result(True)
+        async_mock.return_value = True
 
         # when
         result = await RedisClient.exists("key")
@@ -160,7 +159,7 @@ class TestRedisClient:
         # given
         RedisClient.open_redis_client()
         RedisClient.redis_client.get = async_mock
-        async_mock.return_value.set_result("value")
+        async_mock.return_value = "value"
 
         # when
         result = await RedisClient.get("key")
@@ -185,7 +184,7 @@ class TestRedisClient:
         # given
         RedisClient.open_redis_client()
         RedisClient.redis_client.lrange = async_mock
-        async_mock.return_value.set_result(["value", "value2"])
+        async_mock.return_value = ["value", "value2"]
 
         # when
         result = await RedisClient.lrange("key", 1, -1)
