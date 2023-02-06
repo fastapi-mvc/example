@@ -25,6 +25,20 @@ final: prev: {
         buildInputs = old.buildInputs or [ ] ++ [ py-final.flit-core ];
       });
 
+      pydocstyle = py-prev.pydocstyle.overridePythonAttrs (old: {
+        buildInputs = old.buildInputs or [ ] ++ [ final.poetry ];
+      });
+
+      iniconfig = py-prev.iniconfig.overridePythonAttrs (old: {
+        buildInputs = old.buildInputs or [] ++ [
+          py-final.hatch-vcs
+          py-final.hatchling
+          py-final.build
+          py-final.setuptools-scm
+          py-final.setuptools
+        ];
+      });
+
     });
 
   });
