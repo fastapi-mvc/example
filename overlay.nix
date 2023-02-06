@@ -26,11 +26,11 @@ final: prev: {
       });
 
       pydocstyle = py-prev.pydocstyle.overridePythonAttrs (old: {
-        buildInputs = old.buildInputs or [ ] ++ [ final.poetry ];
+        buildInputs = old.buildInputs or [ ] ++ [ py-final.poetry-core py-final.setuptools ];
       });
 
       iniconfig = py-prev.iniconfig.overridePythonAttrs (old: {
-        buildInputs = old.buildInputs or [] ++ [
+        buildInputs = old.buildInputs or [ ] ++ [
           py-final.hatch-vcs
           py-final.hatchling
           py-final.build
