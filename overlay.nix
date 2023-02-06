@@ -21,6 +21,10 @@ final: prev: {
         buildInputs = old.buildInputs or [ ] ++ [ py-final.flit-core ];
       });
 
+      pathspec = py-prev.pathspec.overridePythonAttrs (old: {
+        buildInputs = old.buildInputs or [ ] ++ [ py-final.flit-core ];
+      });
+
     });
 
   });
