@@ -17,10 +17,6 @@ final: prev: {
         buildInputs = old.buildInputs or [ ] ++ [ py-final.setuptools ];
       });
 
-      packaging = py-prev.packaging.overridePythonAttrs (old: {
-        buildInputs = old.buildInputs or [ ] ++ [ py-final.flit-core ];
-      });
-
       pathspec = py-prev.pathspec.overridePythonAttrs (old: {
         buildInputs = old.buildInputs or [ ] ++ [ py-final.flit-core ];
       });
@@ -35,7 +31,6 @@ final: prev: {
           py-final.hatchling
           py-final.build
           py-final.setuptools-scm
-          py-final.setuptools
         ];
       });
 
