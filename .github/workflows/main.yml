@@ -65,7 +65,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.POETRY_HOME }}
-          key: ${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('./pyproject.toml') }}-{{ hashFiles('./poetry.lock') }}
+          key: ${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('./pyproject.toml') }}-${{ hashFiles('./poetry.lock') }}
       - name: Install package
         run: make install
         if: steps.cached-poetry.outputs.cache-hit != 'true'
@@ -83,7 +83,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.POETRY_HOME }}
-          key: ${{ runner.os }}-${{ env.DEFAULT_PYTHON }}-${{ hashFiles('./pyproject.toml') }}-{{ hashFiles('./poetry.lock') }}
+          key: ${{ runner.os }}-${{ env.DEFAULT_PYTHON }}-${{ hashFiles('./pyproject.toml') }}-${{ hashFiles('./poetry.lock') }}
       - name: Build wheel
         run: make build
       - name: Archive build artifacts
@@ -106,7 +106,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.POETRY_HOME }}
-          key: ${{ runner.os }}-${{ env.DEFAULT_PYTHON }}-${{ hashFiles('./pyproject.toml') }}-{{ hashFiles('./poetry.lock') }}
+          key: ${{ runner.os }}-${{ env.DEFAULT_PYTHON }}-${{ hashFiles('./pyproject.toml') }}-${{ hashFiles('./poetry.lock') }}
       - name: Run metrics checks
         run: make metrics
   unit-tests:
@@ -127,7 +127,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.POETRY_HOME }}
-          key: ${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('./pyproject.toml') }}-{{ hashFiles('./poetry.lock') }}
+          key: ${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('./pyproject.toml') }}-${{ hashFiles('./poetry.lock') }}
       - name: Run unit tests
         run: make unit-test
   integration-tests:
@@ -148,7 +148,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.POETRY_HOME }}
-          key: ${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('./pyproject.toml') }}-{{ hashFiles('./poetry.lock') }}
+          key: ${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('./pyproject.toml') }}-${{ hashFiles('./poetry.lock') }}
       - name: Run integration tests
         run: make integration-test
   coverage:
@@ -165,7 +165,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.POETRY_HOME }}
-          key: ${{ runner.os }}-${{ env.DEFAULT_PYTHON }}-${{ hashFiles('./pyproject.toml') }}-{{ hashFiles('./poetry.lock') }}
+          key: ${{ runner.os }}-${{ env.DEFAULT_PYTHON }}-${{ hashFiles('./pyproject.toml') }}-${{ hashFiles('./poetry.lock') }}
       - name: Run coverage
         run: make coverage
   mypy:
