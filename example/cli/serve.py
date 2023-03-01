@@ -1,4 +1,5 @@
 """Command-line interface - serve command."""
+from typing import Dict, Any
 from multiprocessing import cpu_count
 
 import click
@@ -59,7 +60,7 @@ Run production gunicorn (WSGI) server with uvicorn (ASGI) workers.
     required=False,
 )
 @click.pass_context
-def serve(ctx, **options):
+def serve(ctx: click.Context, **options: Dict[str, Any]) -> None:
     """Define command-line interface serve command.
 
     Args:
@@ -71,7 +72,8 @@ def serve(ctx, **options):
     overrides = dict()
 
     for key, value in options.items():
-        if ctx.get_parameter_source(key).name == "COMMANDLINE":
+        source = ctx.get_parameter_source(key)
+        if source and source.name == "COMMANDLINE":
             overrides[key] = value
 
     ApplicationLoader(

@@ -1,8 +1,12 @@
 """Redis client class utility."""
+from typing import TypeVar, Dict, Union, List, AnyStr
 import logging
 
 from redis import asyncio as aioredis
 from example.config import redis as redis_conf
+
+
+R = TypeVar("R")
 
 
 class RedisClient(object):
@@ -13,22 +17,23 @@ class RedisClient(object):
     Attributes:
         redis_client (aioredis.Redis, optional): Redis client object instance.
         log (logging.Logger): Logging handler for this class.
-        base_redis_init_kwargs (dict): Common kwargs regardless other Redis
-            configuration
-        connection_kwargs (dict, optional): Extra kwargs for Redis object init.
+        base_redis_init_kwargs (typing.Dict[str, typing.Union[str, int]]): Common
+            kwargs regardless other Redis configuration
+        connection_kwargs (typing.Optional[typing.Dict[str, str]]): Extra kwargs
+            for Redis object init.
 
     """
 
     redis_client: aioredis.Redis = None
     log: logging.Logger = logging.getLogger(__name__)
-    base_redis_init_kwargs: dict = {
+    base_redis_init_kwargs: Dict[str, Union[str, int]] = {
         "encoding": "utf-8",
         "port": redis_conf.REDIS_PORT,
     }
-    connection_kwargs: dict = {}
+    connection_kwargs: Dict[str, str] = {}
 
     @classmethod
-    def open_redis_client(cls):
+    def open_redis_client(cls) -> aioredis.Redis:
         """Create Redis client session object instance.
 
         Based on configuration create either Redis client or Redis Sentinel.
@@ -61,20 +66,20 @@ class RedisClient(object):
         return cls.redis_client
 
     @classmethod
-    async def close_redis_client(cls):
+    async def close_redis_client(cls) -> None:
         """Close Redis client."""
         if cls.redis_client:
             cls.log.debug("Closing Redis client")
             await cls.redis_client.close()
 
     @classmethod
-    async def ping(cls):
+    async def ping(cls) -> bool:
         """Execute Redis PING command.
 
         Ping the Redis server.
 
         Returns:
-            response: Boolean, whether Redis client could ping Redis server.
+            bool: Boolean, whether Redis client could ping Redis server.
 
         Raises:
             aioredis.RedisError: If Redis client failed while executing command.
@@ -94,7 +99,7 @@ class RedisClient(object):
             return False
 
     @classmethod
-    async def set(cls, key, value):
+    async def set(cls, key, value) -> R:
         """Execute Redis SET command.
 
         Set key to hold the string value. If key already holds a value, it is
@@ -125,7 +130,7 @@ class RedisClient(object):
             raise ex
 
     @classmethod
-    async def rpush(cls, key, value):
+    async def rpush(cls, key: str, value: Union[str, List[AnyStr]]) -> int:
         """Execute Redis RPUSH command.
 
         Insert all the specified values at the tail of the list stored at key.
@@ -135,10 +140,11 @@ class RedisClient(object):
 
         Args:
             key (str): Redis db key.
-            value (str, list): Single or multiple values to append.
+            value (typing.Union[str, List[typing.AnyStr]]): Single or multiple
+                values to append.
 
         Returns:
-            response: Length of the list after the push operation.
+            int: Length of the list after the push operation.
 
         Raises:
             aioredis.RedisError: If Redis client failed while executing command.
@@ -159,7 +165,7 @@ class RedisClient(object):
             raise ex
 
     @classmethod
-    async def exists(cls, key):
+    async def exists(cls, key: str) -> bool:
         """Execute Redis EXISTS command.
 
         Returns if key exists.
@@ -168,7 +174,7 @@ class RedisClient(object):
             key (str): Redis db key.
 
         Returns:
-            response: Boolean whether key exists in Redis db.
+            bool: Boolean whether key exists in Redis db.
 
         Raises:
             aioredis.RedisError: If Redis client failed while executing command.
@@ -187,7 +193,7 @@ class RedisClient(object):
             raise ex
 
     @classmethod
-    async def get(cls, key):
+    async def get(cls, key: str) -> str:
         """Execute Redis GET command.
 
         Get the value of key. If the key does not exist the special value None
@@ -198,7 +204,7 @@ class RedisClient(object):
             key (str): Redis db key.
 
         Returns:
-            response: Value of key.
+            str: Value of key.
 
         Raises:
             aioredis.RedisError: If Redis client failed while executing command.
@@ -217,7 +223,7 @@ class RedisClient(object):
             raise ex
 
     @classmethod
-    async def lrange(cls, key, start, end):
+    async def lrange(cls, key: str, start: int, end: int) -> str:
         """Execute Redis LRANGE command.
 
         Returns the specified elements of the list stored at key. The offsets
@@ -233,7 +239,7 @@ class RedisClient(object):
             end (int): End offset value.
 
         Returns:
-            response: Returns the specified elements of the list stored at key.
+            str: Returns the specified elements of the list stored at key.
 
         Raises:
             aioredis.RedisError: If Redis client failed while executing command.

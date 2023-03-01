@@ -69,6 +69,8 @@ jobs:
         run: nix flake check
       - name: Run metrics checks
         run: nix run .#metrics
+      - name: Run mypy checks
+        run: nix run .#mypy
       - name: Run tests
         run: nix run .#test
   nix-build:

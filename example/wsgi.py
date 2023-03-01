@@ -1,11 +1,12 @@
 """Application Web Server Gateway Interface - gunicorn."""
+from typing import Any, Optional, Dict
 import logging
 
 from gunicorn.app.base import BaseApplication
 from example.config import gunicorn
 
 
-class ApplicationLoader(BaseApplication):
+class ApplicationLoader(BaseApplication):  # type: ignore
     """Define gunicorn interface for any given web framework.
 
     Args:
@@ -22,7 +23,7 @@ class ApplicationLoader(BaseApplication):
 
     """
 
-    def __init__(self, application, overrides=None):
+    def __init__(self, application: Any, overrides: Optional[Dict[str, Any]] = None):
         """Initialize ApplicationLoader class object instance."""
         if not overrides:
             overrides = dict()
@@ -31,7 +32,7 @@ class ApplicationLoader(BaseApplication):
         self._application = application
         super().__init__()
 
-    def _set_cfg(self, cfg):
+    def _set_cfg(self, cfg: Dict[str, Any]) -> None:
         """Set gunicorn config given map of setting names to their values.
 
         Args:
@@ -53,7 +54,7 @@ class ApplicationLoader(BaseApplication):
                 self.logger.error(f"Invalid value for {k}: {v}")
                 raise ex
 
-    def load_config(self):
+    def load_config(self) -> None:
         """Load gunicorn configuration."""
         self.logger = logging.getLogger(self.__class__.__name__)
         self.cfg.set("default_proc_name", "example")
@@ -63,10 +64,10 @@ class ApplicationLoader(BaseApplication):
 
         self._set_cfg(cfg)
 
-    def init(self, parser, opts, args):
+    def init(self, parser: Any, opts: Any, args: Any) -> None:
         """Patch required but not needed base class method."""
         pass
 
-    def load(self):
+    def load(self) -> Any:
         """Load WSGI application."""
         return self._application

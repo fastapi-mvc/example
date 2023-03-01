@@ -4,7 +4,7 @@ import os
 import click
 
 
-def validate_directory(ctx, param, value):
+def validate_directory(ctx: click.Context, param: click.Option, value: str) -> str:
     """Verify if given path value is writable and parent directory exists.
 
     Args:

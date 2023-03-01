@@ -14,7 +14,7 @@ from example.app.exceptions import (
 log = logging.getLogger(__name__)
 
 
-async def on_startup():
+async def on_startup() -> None:
     """Define FastAPI startup event handler.
 
     Resources:
@@ -28,7 +28,7 @@ async def on_startup():
     AiohttpClient.get_aiohttp_client()
 
 
-async def on_shutdown():
+async def on_shutdown() -> None:
     """Define FastAPI shutdown event handler.
 
     Resources:
@@ -43,7 +43,7 @@ async def on_shutdown():
     await AiohttpClient.close_aiohttp_client()
 
 
-def get_application():
+def get_application() -> FastAPI:
     """Initialize FastAPI application.
 
     Returns:

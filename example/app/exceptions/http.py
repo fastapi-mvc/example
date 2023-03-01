@@ -36,7 +36,7 @@ class HTTPException(Exception):
         self.content = content
         self.headers = headers
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Class custom __repr__ method implementation.
 
         Returns:
@@ -52,7 +52,9 @@ class HTTPException(Exception):
         return f"{self.__class__.__name__}({', '.join(kwargs)})"
 
 
-async def http_exception_handler(request: Request, exception: HTTPException):
+async def http_exception_handler(
+    request: Request, exception: HTTPException
+) -> JSONResponse:
     """Define custom HTTPException handler.
 
     In this application custom handler is added in asgi.py while initializing

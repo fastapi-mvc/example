@@ -1,4 +1,5 @@
 """Application implementation - error response."""
+from typing import Dict, Any, Optional, List, Union
 from typing import Dict, Any, Optional, List
 from http import HTTPStatus
 
@@ -25,14 +26,16 @@ class ErrorModel(BaseModel):
     details: Optional[List[Dict[str, Any]]]
 
     @root_validator(pre=False, skip_on_failure=True)
-    def _set_status(cls, values: dict) -> dict:
+    def _set_status(cls, values: Dict[str, Any]) -> Dict[str, Any]:
         """Set the status field value based on the code attribute value.
 
         Args:
-            values(dict): Stores the attributes of the ErrorModel object.
+            values(typing.Dict[str, typing.Any]): Stores the attributes of the
+                ErrorModel object.
 
         Returns:
-            dict: The attributes of the ErrorModel object with the status field.
+            typing.Dict[str, typing.Any]: The attributes of the ErrorModel object
+                with the status field.
 
         """
         values["status"] = HTTPStatus(values["code"]).name
@@ -82,7 +85,7 @@ class ErrorResponse(BaseModel):
 
     error: ErrorModel
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Union[int, str, List[Dict[str, Any]]]):
         """Initialize ErrorResponse class object instance."""
         # Neat trick to still use kwargs on ErrorResponse model.
         super().__init__(error=ErrorModel(**kwargs))

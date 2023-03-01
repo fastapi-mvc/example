@@ -1,4 +1,5 @@
 """Aiohttp client class utility."""
+from typing import Dict, AnyStr, Any
 import logging
 import asyncio
 from typing import Optional
@@ -28,7 +29,7 @@ class AiohttpClient(object):
     log: logging.Logger = logging.getLogger(__name__)
 
     @classmethod
-    def get_aiohttp_client(cls):
+    def get_aiohttp_client(cls) -> aiohttp.ClientSession:
         """Create aiohttp client session object instance.
 
         Returns:
@@ -50,7 +51,7 @@ class AiohttpClient(object):
         return cls.aiohttp_client
 
     @classmethod
-    async def close_aiohttp_client(cls):
+    async def close_aiohttp_client(cls) -> None:
         """Close aiohttp client session."""
         if cls.aiohttp_client:
             cls.log.debug("Close AiohttpClient session.")
@@ -58,12 +59,18 @@ class AiohttpClient(object):
             cls.aiohttp_client = None
 
     @classmethod
-    async def get(cls, url, headers=None, raise_for_status=False):
+    async def get(
+        cls,
+        url: str,
+        headers: Dict[str, AnyStr] = None,
+        raise_for_status: bool = False,
+    ) -> aiohttp.ClientResponse:
         """Execute HTTP GET request.
 
         Args:
             url (str): HTTP GET request endpoint.
-            headers (dict): Optional HTTP Headers to send with the request.
+            headers (typing.Dict[str, typing.AnyStr]): Optional HTTP Headers to send
+                with the request.
             raise_for_status (bool): Automatically call
                 ClientResponse.raise_for_status() for response if set to True.
 
@@ -84,15 +91,22 @@ class AiohttpClient(object):
         return response
 
     @classmethod
-    async def post(cls, url, data=None, headers=None, raise_for_status=False):
+    async def post(
+        cls,
+        url: str,
+        data: Optional[Any] = None,
+        headers: Dict[str, AnyStr] = None,
+        raise_for_status: bool = False,
+    ) -> aiohttp.ClientResponse:
         """Execute HTTP POST request.
 
         Args:
             url (str): HTTP POST request endpoint.
-            data (any): The data to send in the body of the request. This can
-                be a FormData object or anything that can be passed into
-                FormData, e.g. a dictionary, bytes, or file-like object.
-            headers (dict): Optional HTTP Headers to send with the request.
+            data (typing.Optional[typing.Any]): The data to send in the body of the
+                request. This can be a FormData object or anything that can be passed
+                into FormData, e.g. a dictionary, bytes, or file-like object.
+            headers (typing.Dict[str, typing.AnyStr]): Optional HTTP Headers to send
+                with the request.
             raise_for_status (bool): Automatically call
                 ClientResponse.raise_for_status() for response if set to True.
 
@@ -114,15 +128,22 @@ class AiohttpClient(object):
         return response
 
     @classmethod
-    async def put(cls, url, data=None, headers=None, raise_for_status=False):
+    async def put(
+        cls,
+        url: str,
+        data: Optional[Any] = None,
+        headers: Dict[str, AnyStr] = None,
+        raise_for_status: bool = False,
+    ) -> aiohttp.ClientResponse:
         """Execute HTTP PUT request.
 
         Args:
             url (str): HTTP PUT request endpoint.
-            data (any): The data to send in the body of the request. This can
-                be a FormData object or anything that can be passed into
-                FormData, e.g. a dictionary, bytes, or file-like object.
-            headers (dict): Optional HTTP Headers to send with the request.
+            data (typing.Optional[typing.Any]): The data to send in the body of the
+                request. This can be a FormData object or anything that can be passed
+                into FormData, e.g. a dictionary, bytes, or file-like object.
+            headers (typing.Dict[str, typing.AnyStr]): Optional HTTP Headers to send
+                with the request.
             raise_for_status (bool): Automatically call
                 ClientResponse.raise_for_status() for response if set to True.
 
@@ -144,12 +165,18 @@ class AiohttpClient(object):
         return response
 
     @classmethod
-    async def delete(cls, url, headers=None, raise_for_status=False):
+    async def delete(
+        cls,
+        url: str,
+        headers: Dict[str, AnyStr] = None,
+        raise_for_status: bool = False,
+    ) -> aiohttp.ClientResponse:
         """Execute HTTP DELETE request.
 
         Args:
             url (str): HTTP DELETE request endpoint.
-            headers (dict): Optional HTTP Headers to send with the request.
+            headers (typing.Dict[str, typing.AnyStr]): Optional HTTP Headers to send
+                with the request.
             raise_for_status (bool): Automatically call
                 ClientResponse.raise_for_status() for response if set to True.
 
@@ -170,15 +197,22 @@ class AiohttpClient(object):
         return response
 
     @classmethod
-    async def patch(cls, url, data=None, headers=None, raise_for_status=False):
+    async def patch(
+        cls,
+        url: str,
+        data: Optional[Any] = None,
+        headers: Dict[str, AnyStr] = None,
+        raise_for_status: bool = False,
+    ) -> aiohttp.ClientResponse:
         """Execute HTTP PATCH request.
 
         Args:
             url (str): HTTP PATCH request endpoint.
-            data (any): The data to send in the body of the request. This can
-                be a FormData object or anything that can be passed into
-                FormData, e.g. a dictionary, bytes, or file-like object.
-            headers (dict): Optional HTTP Headers to send with the request.
+            data (typing.Optional[typing.Any]): The data to send in the body of the
+                request. This can be a FormData object or anything that can be passed
+                into FormData, e.g. a dictionary, bytes, or file-like object.
+            headers (typing.Dict[str, typing.AnyStr]): Optional HTTP Headers to send
+                with the request.
             raise_for_status (bool): Automatically call
                 ClientResponse.raise_for_status() for response if set to True.
 

@@ -21,6 +21,7 @@ env:
   POETRY_CONFIG_DIR: /opt/poetry
   POETRY_CACHE_DIR: /opt/poetry/cache
   POETRY_VIRTUALENVS_PATH: /opt/poetry/store
+  DEFAULT_PYTHON: '3.10'
 
 jobs:
   meta:
@@ -74,15 +75,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Set up Python 3.9
+      - name: Set up Python ${{ env.DEFAULT_PYTHON }}
         uses: actions/setup-python@v4
         with:
-          python-version: 3.9
+          python-version: ${{ env.DEFAULT_PYTHON }}
       - name: Load Poetry cache
         uses: actions/cache@v3
         with:
           path: ${{ env.POETRY_HOME }}
-          key: ${{ runner.os }}-3.9-${{ hashFiles('./pyproject.toml') }}-{{ hashFiles('./poetry.lock') }}
+          key: ${{ runner.os }}-${{ env.DEFAULT_PYTHON }}-${{ hashFiles('./pyproject.toml') }}-{{ hashFiles('./poetry.lock') }}
       - name: Build wheel
         run: make build
       - name: Archive build artifacts
@@ -97,15 +98,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Set up Python 3.9
+      - name: Set up Python ${{ env.DEFAULT_PYTHON }}
         uses: actions/setup-python@v4
         with:
-          python-version: 3.9
+          python-version: ${{ env.DEFAULT_PYTHON }}
       - name: Load Poetry cache
         uses: actions/cache@v3
         with:
           path: ${{ env.POETRY_HOME }}
-          key: ${{ runner.os }}-3.9-${{ hashFiles('./pyproject.toml') }}-{{ hashFiles('./poetry.lock') }}
+          key: ${{ runner.os }}-${{ env.DEFAULT_PYTHON }}-${{ hashFiles('./pyproject.toml') }}-{{ hashFiles('./poetry.lock') }}
       - name: Run metrics checks
         run: make metrics
   unit-tests:
@@ -156,14 +157,31 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Set up Python 3.9
+      - name: Set up Python ${{ env.DEFAULT_PYTHON }}
         uses: actions/setup-python@v4
         with:
-          python-version: 3.9
+          python-version: ${{ env.DEFAULT_PYTHON }}
       - name: Load Poetry cache
         uses: actions/cache@v3
         with:
           path: ${{ env.POETRY_HOME }}
-          key: ${{ runner.os }}-3.9-${{ hashFiles('./pyproject.toml') }}-{{ hashFiles('./poetry.lock') }}
+          key: ${{ runner.os }}-${{ env.DEFAULT_PYTHON }}-${{ hashFiles('./pyproject.toml') }}-{{ hashFiles('./poetry.lock') }}
       - name: Run coverage
         run: make coverage
+  mypy:
+    needs: install
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ env.DEFAULT_PYTHON }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.DEFAULT_PYTHON }}
+      - name: Load Poetry cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.POETRY_HOME }}
+          key: ${{ runner.os }}-${{ env.DEFAULT_PYTHON }}-${{ hashFiles('./pyproject.toml') }}-${{ hashFiles('./poetry.lock') }}
+      - name: Run mypy checks
+        run: make mypy

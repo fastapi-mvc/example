@@ -72,6 +72,11 @@ docs: install ## Build example documentation
 	echo "[docs] Build example documentation."
 	${POETRY_BINARY} run sphinx-build docs site
 
+.PHONY: mypy
+mypy: install  ## Run example mypy checks
+	echo "[mypy] Run example mypy checks."
+	${POETRY_BINARY} run mypy example
+
 .PHONY: dev-env
 dev-env: image ## Start a local Kubernetes cluster using minikube and deploy application
 	@build/dev-env.sh

@@ -20,7 +20,7 @@ log = logging.getLogger(__name__)
     status_code=200,
     responses={502: {"model": ErrorResponse}},
 )
-async def readiness_check():
+async def readiness_check() -> ReadyResponse:
     """Run basic application health check.
 
     If the application is up and running then this endpoint will return simple

@@ -1,4 +1,5 @@
 """Command-line interface - root."""
+from typing import Dict, Any
 import logging
 
 import click
@@ -16,7 +17,7 @@ cmd_help = "Example CLI root."
     is_flag=True,
     default=False,
 )
-def cli(**options):
+def cli(**options: Dict[str, Any]) -> None:
     """Define command-line interface root.
 
     Args:
