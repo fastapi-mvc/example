@@ -19,6 +19,7 @@ on:
 
 env:
   NIX_CHANNEL: nixpkgs=channel:nixos-22.11
+  NIX_INSTALL_URL: https://releases.nixos.org/nix/nix-2.13.3/install
 
 jobs:
   meta:
@@ -52,6 +53,7 @@ jobs:
       - uses: cachix/install-nix-action@v18
         with:
           nix_path: ${{ env.NIX_CHANNEL }}
+          install_url: ${{ env.NIX_INSTALL_URL }}
       # Remove bellow step if you do not want to use Cachix - Nix binary cache.
       # For OpenSource projects there is free 5GB of storage.
       # https://www.cachix.org
@@ -85,6 +87,7 @@ jobs:
         with:
           extra_nix_config: "system-features = nixos-test benchmark big-parallel kvm"
           nix_path: ${{ env.NIX_CHANNEL }}
+          install_url: ${{ env.NIX_INSTALL_URL }}
       # Remove bellow step if you do not want to use Cachix - Nix binary cache.
       # For OpenSource projects there is free 5GB of storage.
       # https://www.cachix.org
