@@ -37,7 +37,7 @@ image:  ## Build example image
 .PHONY: metrics
 metrics: install ## Run example metrics checks
 	echo "[metrics] Run example PEP 8 checks."
-	${POETRY_BINARY} run flake8 --select=E,W,I --max-line-length 80 --import-order-style pep8 --statistics --count example
+	${POETRY_BINARY} run flake8 --select=E,W,I --max-line-length 88 --import-order-style pep8 --statistics --count example
 	echo "[metrics] Run example PEP 257 checks."
 	${POETRY_BINARY} run flake8 --select=D --ignore D301 --statistics --count example
 	echo "[metrics] Run example pyflakes checks."
@@ -47,7 +47,7 @@ metrics: install ## Run example metrics checks
 	echo "[metrics] Run example open TODO checks."
 	${POETRY_BINARY} run flake8 --select=T --statistics --count example tests
 	echo "[metrics] Run example black checks."
-	${POETRY_BINARY} run black -l 80 --check example
+	${POETRY_BINARY} run black --check example
 
 .PHONY: unit-test
 unit-test: install ## Run example unit tests

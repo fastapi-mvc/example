@@ -44,9 +44,9 @@ async def readiness_check() -> ReadyResponse:
         log.error("Could not connect to Redis")
         raise HTTPException(
             status_code=502,
-            content=ErrorResponse(
-                code=502, message="Could not connect to Redis"
-            ).dict(exclude_none=True),
+            content=ErrorResponse(code=502, message="Could not connect to Redis").dict(
+                exclude_none=True
+            ),
         )
 
     return ReadyResponse(status="ok")

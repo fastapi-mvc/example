@@ -99,7 +99,7 @@ class RedisClient(object):
             return False
 
     @classmethod
-    async def set(cls, key, value) -> R:
+    async def set(cls, key: str, value: str) -> R:
         """Execute Redis SET command.
 
         Set key to hold the string value. If key already holds a value, it is
@@ -152,9 +152,7 @@ class RedisClient(object):
         """
         redis_client = cls.redis_client
 
-        cls.log.debug(
-            f"Execute Redis RPUSH command, key: {key}, value: {value}"
-        )
+        cls.log.debug(f"Execute Redis RPUSH command, key: {key}, value: {value}")
         try:
             return await redis_client.rpush(key, value)
         except aioredis.RedisError as ex:
@@ -247,8 +245,7 @@ class RedisClient(object):
         """
         redis_client = cls.redis_client
         cls.log.debug(
-            f"Execute Redis LRANGE command, "
-            f"key: {key}, start: {start}, end: {end}"
+            f"Execute Redis LRANGE command, key: {key}, start: {start}, end: {end}"
         )
         try:
             return await redis_client.lrange(key, start, end)
