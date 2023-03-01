@@ -34,6 +34,20 @@ final: prev: {
         ];
       });
 
+      plumbum = py-prev.plumbum.overridePythonAttrs (old: {
+        buildInputs = old.buildInputs or [ ] ++ [ py-final.hatch-vcs py-final.hatchling ];
+      });
+
+      pyyaml-include = py-prev.pyyaml-include.overridePythonAttrs (old: {
+        postPatch = ''
+          substituteInPlace setup.py --replace 'setup()' 'setup(version="${old.version}")'
+        '';
+      });
+
+      fastapi-mvc = py-prev.fastapi-mvc.overridePythonAttrs (old: {
+        buildInputs = old.buildInputs or [ ] ++ [ py-final.poetry ];
+      });
+
     });
 
   });
