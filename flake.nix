@@ -76,7 +76,7 @@
         };
 
         apps = {
-          example = flake-utils.lib.mkApp { drv = config.packages; };
+          example = mkApp { drv = config.packages; };
           metrics = {
             type = "app";
             program = toString (pkgs.writeScript "metrics" ''
