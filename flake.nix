@@ -51,7 +51,6 @@
               pkgs.callPackage ./default.nix {
                 inherit python;
                 poetry2nix = pkgs.poetry2nix;
-                git = pkgs.git;
               };
           in
           {
