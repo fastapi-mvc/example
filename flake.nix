@@ -158,8 +158,8 @@
           test = {
             type = "app";
             program = toString (pkgs.writeScript "test" ''
-              ${apps.unit-test.program}
-              ${apps.integration-test.program}
+              ${config.apps.unit-test.program}
+              ${config.apps.integration-test.program}
             '');
           };
         };
