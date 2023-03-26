@@ -12,9 +12,9 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     poetry2nix = {
-      url = "github:nix-community/poetry2nix?ref=1.39.1";
+      url = "github:nix-community/poetry2nix?ref=1.40.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
