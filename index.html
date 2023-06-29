@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Documentation &#8212; example Documentation (0.1.0)</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/click.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="install.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="install.html" title="Installation"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">example Documentation (0.1.0)</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Documentation</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="documentation">
+<h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading">¶</a></h1>
+<hr class="docutils" />
+<p><strong>This project was generated with:</strong> <a class="reference external" href="https://github.com/fastapi-mvc/fastapi-mvc">fastapi-mvc</a></p>
+<hr class="docutils" />
+<section id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this heading">¶</a></h2>
+<p>If You want to go easy way and use provided virtualized environment You’ll need to have installed:</p>
+<ul class="simple">
+<li><p>rsync</p></li>
+<li><p>Vagrant <a class="reference external" href="https://www.vagrantup.com/downloads">(How to install vagrant)</a></p></li>
+<li><p>(Optional) Enabled virtualization in BIOS</p></li>
+</ul>
+<p>First run <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code> in project root directory and enter virtualized environment using <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">ssh</span></code>
+Then run following commands to bootstrap local development cluster exposing <code class="docutils literal notranslate"><span class="pre">fastapi-mvc</span></code> application.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/syncd
+make<span class="w"> </span>dev-env
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This process may take a while on first run.</p>
+</div>
+<p>Once development cluster is up and running you should see summary listing application address:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Kubernetes<span class="w"> </span>cluster<span class="w"> </span>ready
+
+fastapi-mvc<span class="w"> </span>available<span class="w"> </span>under:<span class="w"> </span>http://example.192.168.49.2.nip.io/
+
+You<span class="w"> </span>can<span class="w"> </span>delete<span class="w"> </span>dev-env<span class="w"> </span>by<span class="w"> </span>issuing:<span class="w"> </span>minikube<span class="w"> </span>delete
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Above address may be different for your installation.</p>
+<p>Provided virtualized env doesn’t have port forwarding configured which means, that bootstrapped application stack in k8s won’t be accessible on Host OS.</p>
+</div>
+<p>Deployed application stack in Kubernetes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vagrant@ubuntu-focal:/syncd$<span class="w"> </span>make<span class="w"> </span>dev-env
+...
+...
+...
+Kubernetes<span class="w"> </span>cluster<span class="w"> </span>ready
+FastAPI<span class="w"> </span>available<span class="w"> </span>under:<span class="w"> </span>http://example.192.168.49.2.nip.io/
+You<span class="w"> </span>can<span class="w"> </span>delete<span class="w"> </span>dev-env<span class="w"> </span>by<span class="w"> </span>issuing:<span class="w"> </span>make<span class="w"> </span>clean
+vagrant@ubuntu-focal:/syncd$<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>all<span class="w"> </span>-n<span class="w"> </span>example
+NAME<span class="w">                                                     </span>READY<span class="w">   </span>STATUS<span class="w">    </span>RESTARTS<span class="w">   </span>AGE
+pod/example-7f4dd8dc7f-p2kr7<span class="w">                </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>55s
+pod/rfr-redisfailover-persistent-keep-0<span class="w">                  </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>3m39s
+pod/rfr-redisfailover-persistent-keep-1<span class="w">                  </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>3m39s
+pod/rfr-redisfailover-persistent-keep-2<span class="w">                  </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>3m39s
+pod/rfs-redisfailover-persistent-keep-5d46b5bcf8-2r7th<span class="w">   </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>3m39s
+pod/rfs-redisfailover-persistent-keep-5d46b5bcf8-6kqv5<span class="w">   </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>3m39s
+pod/rfs-redisfailover-persistent-keep-5d46b5bcf8-sgtvv<span class="w">   </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>3m39s
+
+NAME<span class="w">                                        </span>TYPE<span class="w">        </span>CLUSTER-IP<span class="w">      </span>EXTERNAL-IP<span class="w">   </span>PORT<span class="o">(</span>S<span class="o">)</span><span class="w">     </span>AGE
+service/example<span class="w">                </span>ClusterIP<span class="w">   </span><span class="m">10</span>.110.42.252<span class="w">   </span>&lt;none&gt;<span class="w">        </span><span class="m">8000</span>/TCP<span class="w">    </span>56s
+service/rfs-redisfailover-persistent-keep<span class="w">   </span>ClusterIP<span class="w">   </span><span class="m">10</span>.110.4.24<span class="w">     </span>&lt;none&gt;<span class="w">        </span><span class="m">26379</span>/TCP<span class="w">   </span>3m39s
+
+NAME<span class="w">                                                </span>READY<span class="w">   </span>UP-TO-DATE<span class="w">   </span>AVAILABLE<span class="w">   </span>AGE
+deployment.apps/example<span class="w">                </span><span class="m">1</span>/1<span class="w">     </span><span class="m">1</span><span class="w">            </span><span class="m">1</span><span class="w">           </span>55s
+deployment.apps/rfs-redisfailover-persistent-keep<span class="w">   </span><span class="m">3</span>/3<span class="w">     </span><span class="m">3</span><span class="w">            </span><span class="m">3</span><span class="w">           </span>3m39s
+
+NAME<span class="w">                                                           </span>DESIRED<span class="w">   </span>CURRENT<span class="w">   </span>READY<span class="w">   </span>AGE
+replicaset.apps/example-7f4dd8dc7f<span class="w">                </span><span class="m">1</span><span class="w">         </span><span class="m">1</span><span class="w">         </span><span class="m">1</span><span class="w">       </span>55s
+replicaset.apps/rfs-redisfailover-persistent-keep-5d46b5bcf8<span class="w">   </span><span class="m">3</span><span class="w">         </span><span class="m">3</span><span class="w">         </span><span class="m">3</span><span class="w">       </span>3m39s
+
+NAME<span class="w">                                                 </span>READY<span class="w">   </span>AGE
+statefulset.apps/rfr-redisfailover-persistent-keep<span class="w">   </span><span class="m">3</span>/3<span class="w">     </span>3m39s
+
+NAME<span class="w">                                                                  </span>AGE
+redisfailover.databases.spotahome.com/redisfailover-persistent-keep<span class="w">   </span>3m39s
+vagrant@ubuntu-focal:/syncd$<span class="w"> </span>curl<span class="w"> </span>http://example.192.168.49.2.nip.io/api/ready
+<span class="o">{</span><span class="s2">&quot;status&quot;</span>:<span class="s2">&quot;ok&quot;</span><span class="o">}</span>
+</pre></div>
+</div>
+<section id="id1">
+<h3>Documentation<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
+<p>This part of the documentation guides you through all of the features and usage.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#application">Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#infrastructure">Infrastructure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nix.html">Using Nix</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nix.html#installation">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#cli">CLI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#dockerfile">Dockerfile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#development">Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#configuration">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment</a></li>
+</ul>
+</div>
+</section>
+<section id="api-reference">
+<h3>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading">¶</a></h3>
+<p>If you are looking for information on a specific function, class, or
+method, this part of the documentation is for you.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#wsgi">WSGI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-example.config">Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-example.cli">CLI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-example.app">App</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="miscellaneous-pages">
+<h3>Miscellaneous Pages<a class="headerlink" href="#miscellaneous-pages" title="Permalink to this heading">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id1">0.1.0</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+            <p class="logo"><a href="#">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+  
+
+  <h3>Project Links</h3>
+  <ul>
+    <li><a href="https://github.com/fastapi-mvc/example">Source Code</a>
+  </ul>
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">Documentation</a><ul>
+<li><a class="reference internal" href="#quickstart">Quickstart</a><ul>
+<li><a class="reference internal" href="#id1">Documentation</a></li>
+<li><a class="reference internal" href="#api-reference">API Reference</a></li>
+<li><a class="reference internal" href="#miscellaneous-pages">Miscellaneous Pages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Radosław Szamszur.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

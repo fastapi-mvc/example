@@ -1,0 +1,740 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Usage &#8212; example Documentation (0.1.0)</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/click.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Deployment" href="deployment.html" />
+    <link rel="prev" title="Using Nix" href="nix.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="deployment.html" title="Deployment"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="nix.html" title="Using Nix"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">example Documentation (0.1.0)</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Usage</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h1>
+<section id="cli">
+<h2>CLI<a class="headerlink" href="#cli" title="Permalink to this heading">¶</a></h2>
+<p>This package exposes simple CLI for easier interaction:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>example<span class="w"> </span>--help
+Usage:<span class="w"> </span>example<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>COMMAND<span class="w"> </span><span class="o">[</span>ARGS<span class="o">]</span>...
+
+<span class="w">  </span>Example<span class="w"> </span>CLI<span class="w"> </span>root.
+
+Options:
+<span class="w">  </span>-v,<span class="w"> </span>--verbose<span class="w">  </span>Enable<span class="w"> </span>verbose<span class="w"> </span>logging.
+<span class="w">  </span>--help<span class="w">         </span>Show<span class="w"> </span>this<span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span>exit.
+
+Commands:
+<span class="w">  </span>serve<span class="w">  </span>example<span class="w"> </span>CLI<span class="w"> </span>serve<span class="w"> </span>command.
+$<span class="w"> </span>example<span class="w"> </span>serve<span class="w"> </span>--help
+Usage:<span class="w"> </span>example<span class="w"> </span>serve<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
+
+<span class="w">  </span>Run<span class="w"> </span>production<span class="w"> </span>gunicorn<span class="w"> </span><span class="o">(</span>WSGI<span class="o">)</span><span class="w"> </span>server<span class="w"> </span>with<span class="w"> </span>uvicorn<span class="w"> </span><span class="o">(</span>ASGI<span class="o">)</span><span class="w"> </span>workers.
+
+Options:
+<span class="w">  </span>--bind<span class="w"> </span>TEXT<span class="w">                  </span>Host<span class="w"> </span>to<span class="w"> </span>bind.
+<span class="w">  </span>-w,<span class="w"> </span>--workers<span class="w"> </span>INTEGER<span class="w"> </span>RANGE<span class="w">  </span>The<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>worker<span class="w"> </span>processes<span class="w"> </span><span class="k">for</span><span class="w"> </span>handling
+<span class="w">                               </span>requests.
+<span class="w">  </span>-D,<span class="w"> </span>--daemon<span class="w">                 </span>Daemonize<span class="w"> </span>the<span class="w"> </span>Gunicorn<span class="w"> </span>process.
+<span class="w">  </span>-e,<span class="w"> </span>--env<span class="w"> </span>TEXT<span class="w">               </span>Set<span class="w"> </span>environment<span class="w"> </span>variables<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>execution
+<span class="w">                               </span>environment.
+<span class="w">  </span>--pid<span class="w"> </span>PATH<span class="w">                   </span>Specifies<span class="w"> </span>the<span class="w"> </span>PID<span class="w"> </span>file.
+<span class="w">  </span>--help<span class="w">                       </span>Show<span class="w"> </span>this<span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span>exit.
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Maximum number of workers may be different in your case, it’s limited to <code class="docutils literal notranslate"><span class="pre">multiprocessing.cpu_count()</span></code></p>
+</div>
+<section id="wsgi-asgi-production-server">
+<h3>WSGI + ASGI production server<a class="headerlink" href="#wsgi-asgi-production-server" title="Permalink to this heading">¶</a></h3>
+<p>To run production unicorn + uvicorn (WSGI + ASGI) server you can use project CLI serve command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example<span class="w"> </span>serve
+<span class="o">[</span><span class="m">2022</span>-04-23<span class="w"> </span><span class="m">20</span>:21:49<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">4769</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Start<span class="w"> </span>gunicorn<span class="w"> </span>WSGI<span class="w"> </span>with<span class="w"> </span>ASGI<span class="w"> </span>workers.
+<span class="o">[</span><span class="m">2022</span>-04-23<span class="w"> </span><span class="m">20</span>:21:49<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">4769</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Starting<span class="w"> </span>gunicorn<span class="w"> </span><span class="m">20</span>.1.0
+<span class="o">[</span><span class="m">2022</span>-04-23<span class="w"> </span><span class="m">20</span>:21:49<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">4769</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Listening<span class="w"> </span>at:<span class="w"> </span>http://127.0.0.1:8000<span class="w"> </span><span class="o">(</span><span class="m">4769</span><span class="o">)</span>
+<span class="o">[</span><span class="m">2022</span>-04-23<span class="w"> </span><span class="m">20</span>:21:49<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">4769</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Using<span class="w"> </span>worker:<span class="w"> </span>uvicorn.workers.UvicornWorker
+<span class="o">[</span><span class="m">2022</span>-04-23<span class="w"> </span><span class="m">20</span>:21:49<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">4769</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Server<span class="w"> </span>is<span class="w"> </span>ready.<span class="w"> </span>Spawning<span class="w"> </span>workers
+<span class="o">[</span><span class="m">2022</span>-04-23<span class="w"> </span><span class="m">20</span>:21:49<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">4771</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Booting<span class="w"> </span>worker<span class="w"> </span>with<span class="w"> </span>pid:<span class="w"> </span><span class="m">4771</span>
+<span class="o">[</span><span class="m">2022</span>-04-23<span class="w"> </span><span class="m">20</span>:21:49<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">4771</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Worker<span class="w"> </span>spawned<span class="w"> </span><span class="o">(</span>pid:<span class="w"> </span><span class="m">4771</span><span class="o">)</span>
+<span class="o">[</span><span class="m">2022</span>-04-23<span class="w"> </span><span class="m">20</span>:21:49<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">4771</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Started<span class="w"> </span>server<span class="w"> </span>process<span class="w"> </span><span class="o">[</span><span class="m">4771</span><span class="o">]</span>
+<span class="o">[</span><span class="m">2022</span>-04-23<span class="w"> </span><span class="m">20</span>:21:49<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">4771</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Waiting<span class="w"> </span><span class="k">for</span><span class="w"> </span>application<span class="w"> </span>startup.
+<span class="o">[</span><span class="m">2022</span>-04-23<span class="w"> </span><span class="m">20</span>:21:49<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">4771</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Application<span class="w"> </span>startup<span class="w"> </span>complete.
+<span class="o">[</span><span class="m">2022</span>-04-23<span class="w"> </span><span class="m">20</span>:21:49<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">4772</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Booting<span class="w"> </span>worker<span class="w"> </span>with<span class="w"> </span>pid:<span class="w"> </span><span class="m">4772</span>
+<span class="o">[</span><span class="m">2022</span>-04-23<span class="w"> </span><span class="m">20</span>:21:49<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">4772</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Worker<span class="w"> </span>spawned<span class="w"> </span><span class="o">(</span>pid:<span class="w"> </span><span class="m">4772</span><span class="o">)</span>
+<span class="o">[</span><span class="m">2022</span>-04-23<span class="w"> </span><span class="m">20</span>:21:49<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">4772</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Started<span class="w"> </span>server<span class="w"> </span>process<span class="w"> </span><span class="o">[</span><span class="m">4772</span><span class="o">]</span>
+<span class="o">[</span><span class="m">2022</span>-04-23<span class="w"> </span><span class="m">20</span>:21:49<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">4772</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Waiting<span class="w"> </span><span class="k">for</span><span class="w"> </span>application<span class="w"> </span>startup.
+<span class="o">[</span><span class="m">2022</span>-04-23<span class="w"> </span><span class="m">20</span>:21:49<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">4772</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Application<span class="w"> </span>startup<span class="w"> </span>complete.
+</pre></div>
+</div>
+<p>To confirm it’s working:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>curl<span class="w"> </span>localhost:8000/api/ready
+<span class="o">{</span><span class="s2">&quot;status&quot;</span>:<span class="s2">&quot;ok&quot;</span><span class="o">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="dockerfile">
+<h2>Dockerfile<a class="headerlink" href="#dockerfile" title="Permalink to this heading">¶</a></h2>
+<p>This project provides Dockerfile for containerized environment.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>make<span class="w"> </span>image
+$<span class="w"> </span>podman<span class="w"> </span>run<span class="w"> </span>-dit<span class="w"> </span>--name<span class="w"> </span>example<span class="w"> </span>-p<span class="w"> </span><span class="m">8000</span>:8000<span class="w"> </span>example:<span class="k">$(</span>cat<span class="w"> </span>TAG<span class="k">)</span>
+f41e5fa7ffd512aea8f1aad1c12157bf1e66f961aeb707f51993e9ac343f7a4b
+$<span class="w"> </span>podman<span class="w"> </span>ps
+CONTAINER<span class="w"> </span>ID<span class="w">  </span>IMAGE<span class="w">                                 </span>COMMAND<span class="w">               </span>CREATED<span class="w">        </span>STATUS<span class="w">            </span>PORTS<span class="w">                   </span>NAMES
+f41e5fa7ffd5<span class="w">  </span>localhost/example:0.1.0<span class="w">  </span>/usr/bin/fastapi<span class="w"> </span>...<span class="w">  </span><span class="m">2</span><span class="w"> </span>seconds<span class="w"> </span>ago<span class="w">  </span>Up<span class="w"> </span><span class="m">3</span><span class="w"> </span>seconds<span class="w"> </span>ago<span class="w">  </span><span class="m">0</span>.0.0.0:8000-&gt;8000/tcp<span class="w">  </span>example
+$<span class="w"> </span>curl<span class="w"> </span>localhost:8000/api/ready
+<span class="o">{</span><span class="s2">&quot;status&quot;</span>:<span class="s2">&quot;ok&quot;</span><span class="o">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Replace podman with docker if it’s yours containerization engine.</p>
+</div>
+</section>
+<section id="development">
+<h2>Development<a class="headerlink" href="#development" title="Permalink to this heading">¶</a></h2>
+<p>You can implement your own web routes logic straight away in <code class="docutils literal notranslate"><span class="pre">example.controllers</span></code> submodule. For more information please see <a class="reference external" href="https://fastapi.tiangolo.com/tutorial/">FastAPI documentation</a>.</p>
+<section id="makefile">
+<h3>Makefile<a class="headerlink" href="#makefile" title="Permalink to this heading">¶</a></h3>
+<p>Provided Makefile is a starting point for application and infrastructure development:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Usage:
+<span class="w">  </span>make<span class="w"> </span>&lt;target&gt;
+<span class="w">  </span><span class="nb">help</span><span class="w">             </span>Display<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span>
+<span class="w">  </span>image<span class="w">            </span>Build<span class="w"> </span>example<span class="w"> </span>image
+<span class="w">  </span>clean-image<span class="w">      </span>Clean<span class="w"> </span>example<span class="w"> </span>image
+<span class="w">  </span>install<span class="w">          </span>Install<span class="w"> </span>example<span class="w"> </span>with<span class="w"> </span>poetry
+<span class="w">  </span>metrics<span class="w">          </span>Run<span class="w"> </span>example<span class="w"> </span>metrics<span class="w"> </span>checks
+<span class="w">  </span>unit-test<span class="w">        </span>Run<span class="w"> </span>example<span class="w"> </span>unit<span class="w"> </span>tests
+<span class="w">  </span>integration-test<span class="w">  </span>Run<span class="w"> </span>example<span class="w"> </span>integration<span class="w"> </span>tests
+<span class="w">  </span>docs<span class="w">             </span>Build<span class="w"> </span>example<span class="w"> </span>documentation
+<span class="w">  </span>dev-env<span class="w">          </span>Start<span class="w"> </span>a<span class="w"> </span><span class="nb">local</span><span class="w"> </span>Kubernetes<span class="w"> </span>cluster<span class="w"> </span>using<span class="w"> </span>minikube<span class="w"> </span>and<span class="w"> </span>deploy<span class="w"> </span>application
+<span class="w">  </span>clean<span class="w">            </span>Remove<span class="w"> </span>.cache<span class="w"> </span>directory<span class="w"> </span>and<span class="w"> </span>cached<span class="w"> </span>minikube
+</pre></div>
+</div>
+</section>
+<section id="utilities">
+<h3>Utilities<a class="headerlink" href="#utilities" title="Permalink to this heading">¶</a></h3>
+<p>Available utilities:</p>
+<ul class="simple">
+<li><p>RedisClient <code class="docutils literal notranslate"><span class="pre">example.app.utils.redis</span></code></p></li>
+<li><p>AiohttpClient <code class="docutils literal notranslate"><span class="pre">example.app.utils.aiohttp_client</span></code></p></li>
+</ul>
+<p>They’re initialized in <code class="docutils literal notranslate"><span class="pre">asgi.py</span></code> on FastAPI startup event handler:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">on_startup</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fastapi startup event handler.</span>
+
+<span class="sd">    Creates RedisClient and AiohttpClient session.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Execute FastAPI startup event handler.&quot;</span><span class="p">)</span>
+    <span class="c1"># Initialize utilities for whole FastAPI application without passing object</span>
+    <span class="c1"># instances within the logic. Feel free to disable it if you don&#39;t need it.</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">USE_REDIS</span><span class="p">:</span>
+<span class="hll">        <span class="k">await</span> <span class="n">RedisClient</span><span class="o">.</span><span class="n">open_redis_client</span><span class="p">()</span>
+</span>
+<span class="hll">    <span class="n">AiohttpClient</span><span class="o">.</span><span class="n">get_aiohttp_client</span><span class="p">()</span>
+</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">on_shutdown</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fastapi shutdown event handler.</span>
+
+<span class="sd">    Destroys RedisClient and AiohttpClient session.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Execute FastAPI shutdown event handler.&quot;</span><span class="p">)</span>
+    <span class="c1"># Gracefully close utilities.</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">USE_REDIS</span><span class="p">:</span>
+<span class="hll">        <span class="k">await</span> <span class="n">RedisClient</span><span class="o">.</span><span class="n">close_redis_client</span><span class="p">()</span>
+</span>
+<span class="hll">    <span class="k">await</span> <span class="n">AiohttpClient</span><span class="o">.</span><span class="n">close_aiohttp_client</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p>and are available for whole application scope without passing object instances. In order to utilize it just execute classmethods directly.</p>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">example.app.utils</span> <span class="kn">import</span> <span class="n">RedisClient</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">RedisClient</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Key&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="exceptions">
+<h3>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this heading">¶</a></h3>
+<p><strong>HTTPException and handler</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Application implementation - custom FastAPI HTTP exception with handler.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">Request</span>
+<span class="kn">from</span> <span class="nn">fastapi.responses</span> <span class="kn">import</span> <span class="n">JSONResponse</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Define custom HTTPException class definition.</span>
+
+<span class="sd">    This exception combined with exception_handler method allows you to use it</span>
+<span class="sd">    the same manner as you&#39;d use FastAPI.HTTPException with one difference. You</span>
+<span class="sd">    have freedom to define returned response body, whereas in</span>
+<span class="sd">    FastAPI.HTTPException content is returned under &quot;detail&quot; JSON key.</span>
+
+<span class="sd">    FastAPI.HTTPException source:</span>
+<span class="sd">    https://github.com/tiangolo/fastapi/blob/master/fastapi/exceptions.py</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">status_code</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">content</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize HTTPException class object instance.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            status_code (int): HTTP error status code.</span>
+<span class="sd">            content (Any): Response body.</span>
+<span class="sd">            headers (Optional[Dict[str, Any]]): Additional response headers.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="n">status_code</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">content</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Class custom __repr__ method implementation.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: HTTPException string object.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">):</span>
+                <span class="n">kwargs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">http_exception_handler</span><span class="p">(</span>
+    <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">exception</span><span class="p">:</span> <span class="n">HTTPException</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONResponse</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Define custom HTTPException handler.</span>
+
+<span class="sd">    In this application custom handler is added in asgi.py while initializing</span>
+<span class="sd">    FastAPI application. This is needed in order to handle custom HTTException</span>
+<span class="sd">    globally.</span>
+
+<span class="sd">    More details:</span>
+<span class="sd">    https://fastapi.tiangolo.com/tutorial/handling-errors/#install-custom-exception-handlers</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (starlette.requests.Request): Request class object instance.</span>
+<span class="sd">            More details: https://www.starlette.io/requests/</span>
+<span class="sd">        exception (HTTPException): Custom HTTPException class object instance.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        FastAPI.response.JSONResponse class object instance initialized with</span>
+<span class="sd">            kwargs from custom HTTPException.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span>
+        <span class="n">status_code</span><span class="o">=</span><span class="n">exception</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span>
+        <span class="n">content</span><span class="o">=</span><span class="n">exception</span><span class="o">.</span><span class="n">content</span><span class="p">,</span>
+        <span class="n">headers</span><span class="o">=</span><span class="n">exception</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>This exception combined with <code class="docutils literal notranslate"><span class="pre">http_exception_handler</span></code> method allows you to use it the same manner as you’d use <code class="docutils literal notranslate"><span class="pre">FastAPI.HTTPException</span></code> with one difference.
+You have freedom to define returned response body, whereas in <code class="docutils literal notranslate"><span class="pre">FastAPI.HTTPException</span></code> content is returned under “detail” JSON key.
+In this application custom handler is added in <code class="docutils literal notranslate"><span class="pre">asgi.py</span></code> while initializing FastAPI application. This is needed in order to handle it globally.</p>
+</section>
+<section id="web-routes">
+<h3>Web Routes<a class="headerlink" href="#web-routes" title="Permalink to this heading">¶</a></h3>
+<p>All routes documentation is available on:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/</span></code> with Swagger</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/redoc</span></code> or ReDoc.</p></li>
+</ul>
+</section>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading">¶</a></h2>
+<p>This application provides flexibility of configuration. All significant settings are defined by the environment variables, each with the default value.
+Moreover, package CLI allows overriding core ones: host, port, workers. You can modify all other available configuration settings in the gunicorn.conf.py file.</p>
+<p>Priority of overriding configuration:</p>
+<ol class="arabic simple">
+<li><p>cli</p></li>
+<li><p>environment variables</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gunicorn.py</span></code></p></li>
+</ol>
+<p>All application configuration is available in <code class="docutils literal notranslate"><span class="pre">example.config</span></code> submodule.</p>
+<section id="environment-variables">
+<h3>Environment variables<a class="headerlink" href="#environment-variables" title="Permalink to this heading">¶</a></h3>
+<p><strong>Application configuration</strong></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FASTAPI_BIND</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;127.0.0.1:8000&quot;</span></code></p></td>
+<td><p>The socket to bind. A string of the form: ‘HOST’, ‘HOST:PORT’, ‘unix:PATH’. An IP is a valid HOST.</p></td>
+</tr>
+<tr class="row-odd"><td><p>FASTAPI_WORKERS</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;2&quot;</span></code></p></td>
+<td><p>Number of gunicorn workers (uvicorn.workers.UvicornWorker).</p></td>
+</tr>
+<tr class="row-even"><td><p>FASTAPI_DEBUG</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;True&quot;</span></code></p></td>
+<td><p>FastAPI logging level. You should disable this for production.</p></td>
+</tr>
+<tr class="row-odd"><td><p>FASTAPI_PROJECT_NAME</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;example&quot;</span></code></p></td>
+<td><p>FastAPI project name.</p></td>
+</tr>
+<tr class="row-even"><td><p>FASTAPI_VERSION</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;0.1.0&quot;</span></code></p></td>
+<td><p>Application version.</p></td>
+</tr>
+<tr class="row-odd"><td><p>FASTAPI_DOCS_URL</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;/&quot;</span></code></p></td>
+<td><p>Path where swagger ui will be served at.</p></td>
+</tr>
+<tr class="row-even"><td><p>FASTAPI_USE_REDIS</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;False&quot;</span></code></p></td>
+<td><p>Whether or not to use Redis.</p></td>
+</tr>
+<tr class="row-odd"><td><p>FASTAPI_GUNICORN_LOG_LEVEL</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;info&quot;</span></code></p></td>
+<td><p>The granularity of gunicorn log output.</p></td>
+</tr>
+<tr class="row-even"><td><p>FASTAPI_GUNICORN_LOG_FORMAT</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'%(h)s</span> <span class="pre">%(l)s</span> <span class="pre">%(u)s</span> <span class="pre">%(t)s</span> <span class="pre">&quot;%(r)s&quot;</span> <span class="pre">%(s)s</span> <span class="pre">%(b)s</span> <span class="pre">&quot;%(f)s&quot;</span> <span class="pre">&quot;%(a)s&quot;'</span></code></p></td>
+<td><p>Gunicorn log format.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Redis configuration</strong></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FASTAPI_REDIS_HOTS</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;127.0.0.1&quot;</span></code></p></td>
+<td><p>Redis host.</p></td>
+</tr>
+<tr class="row-odd"><td><p>FASTAPI_REDIS_PORT</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;6379&quot;</span></code></p></td>
+<td><p>Redis port.</p></td>
+</tr>
+<tr class="row-even"><td><p>FASTAPI_REDIS_USERNAME</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p></td>
+<td><p>Redis username.</p></td>
+</tr>
+<tr class="row-odd"><td><p>FASTAPI_REDIS_PASSWORD</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p></td>
+<td><p>Redis password.</p></td>
+</tr>
+<tr class="row-even"><td><p>FASTAPI_REDIS_USE_SENTINEL</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;False&quot;</span></code></p></td>
+<td><p>If provided Redis config is for Sentinel.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gunicorn">
+<h3>Gunicorn<a class="headerlink" href="#gunicorn" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://docs.gunicorn.org/en/latest/settings.html">Gunicorn configuration file documentation</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Gunicorn configuration file.</span>
+
+<span class="sd">Resources:</span>
+<span class="sd">    1. https://docs.gunicorn.org/en/20.1.0/settings.html</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+
+<span class="c1"># Server socket</span>
+<span class="c1">#</span>
+<span class="c1">#   bind - The socket to bind.</span>
+<span class="c1">#</span>
+<span class="c1">#       A string of the form: &#39;HOST&#39;, &#39;HOST:PORT&#39;, &#39;unix:PATH&#39;.</span>
+<span class="c1">#       An IP is a valid HOST.</span>
+<span class="c1">#</span>
+<span class="c1">#   backlog - The number of pending connections. This refers</span>
+<span class="c1">#       to the number of clients that can be waiting to be</span>
+<span class="c1">#       served. Exceeding this number results in the client</span>
+<span class="c1">#       getting an error when attempting to connect. It should</span>
+<span class="c1">#       only affect servers under significant load.</span>
+<span class="c1">#</span>
+<span class="c1">#       Must be a positive integer. Generally set in the 64-2048</span>
+<span class="c1">#       range.</span>
+<span class="c1">#</span>
+
+<span class="n">bind</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;FASTAPI_BIND&quot;</span><span class="p">,</span> <span class="s2">&quot;127.0.0.1:8000&quot;</span><span class="p">)</span>
+<span class="n">backlog</span> <span class="o">=</span> <span class="mi">2048</span>
+
+<span class="c1">#</span>
+<span class="c1"># Worker processes</span>
+<span class="c1">#</span>
+<span class="c1">#   workers - The number of worker processes that this server</span>
+<span class="c1">#       should keep alive for handling requests.</span>
+<span class="c1">#</span>
+<span class="c1">#       A positive integer generally in the 2-4 x $(NUM_CORES)</span>
+<span class="c1">#       range. You&#39;ll want to vary this a bit to find the best</span>
+<span class="c1">#       for your particular application&#39;s work load.</span>
+<span class="c1">#</span>
+<span class="c1">#   worker_class - The type of workers to use. The default</span>
+<span class="c1">#       sync class should handle most &#39;normal&#39; types of work</span>
+<span class="c1">#       loads. You&#39;ll want to read</span>
+<span class="c1">#       http://docs.gunicorn.org/en/latest/design.html#choosing-a-worker-type</span>
+<span class="c1">#       for information on when you might want to choose one</span>
+<span class="c1">#       of the other worker classes.</span>
+<span class="c1">#</span>
+<span class="c1">#       A string referring to a Python path to a subclass of</span>
+<span class="c1">#       gunicorn.workers.base.Worker. The default provided values</span>
+<span class="c1">#       can be seen at</span>
+<span class="c1">#       http://docs.gunicorn.org/en/latest/settings.html#worker-class</span>
+<span class="c1">#</span>
+<span class="c1">#   worker_connections - For the eventlet and gevent worker classes</span>
+<span class="c1">#       this limits the maximum number of simultaneous clients that</span>
+<span class="c1">#       a single process can handle.</span>
+<span class="c1">#</span>
+<span class="c1">#       A positive integer generally set to around 1000.</span>
+<span class="c1">#</span>
+<span class="c1">#   timeout - If a worker does not notify the master process in this</span>
+<span class="c1">#       number of seconds it is killed and a new worker is spawned</span>
+<span class="c1">#       to replace it.</span>
+<span class="c1">#</span>
+<span class="c1">#       Generally set to thirty seconds. Only set this noticeably</span>
+<span class="c1">#       higher if you&#39;re sure of the repercussions for sync workers.</span>
+<span class="c1">#       For the non sync workers it just means that the worker</span>
+<span class="c1">#       process is still communicating and is not tied to the length</span>
+<span class="c1">#       of time required to handle a single request.</span>
+<span class="c1">#</span>
+<span class="c1">#   keepalive - The number of seconds to wait for the next request</span>
+<span class="c1">#       on a Keep-Alive HTTP connection.</span>
+<span class="c1">#</span>
+<span class="c1">#       A positive integer. Generally set in the 1-5 seconds range.</span>
+<span class="c1">#</span>
+<span class="c1">#   reload - Restart workers when code changes.</span>
+<span class="c1">#</span>
+<span class="c1">#       True or False</span>
+
+<span class="n">workers</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;FASTAPI_WORKERS&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">worker_class</span> <span class="o">=</span> <span class="s2">&quot;uvicorn.workers.UvicornWorker&quot;</span>
+<span class="n">worker_connections</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">keepalive</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">reload</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1">#</span>
+<span class="c1">#   spew - Install a trace function that spews every line of Python</span>
+<span class="c1">#       that is executed when running the server. This is the</span>
+<span class="c1">#       nuclear option.</span>
+<span class="c1">#</span>
+<span class="c1">#       True or False</span>
+<span class="c1">#</span>
+
+<span class="n">spew</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1">#</span>
+<span class="c1"># Server mechanics</span>
+<span class="c1">#</span>
+<span class="c1">#   daemon - Detach the main Gunicorn process from the controlling</span>
+<span class="c1">#       terminal with a standard fork/fork sequence.</span>
+<span class="c1">#</span>
+<span class="c1">#       True or False</span>
+<span class="c1">#</span>
+<span class="c1">#   raw_env - Pass environment variables to the execution environment.</span>
+<span class="c1">#</span>
+<span class="c1">#   pidfile - The path to a pid file to write</span>
+<span class="c1">#</span>
+<span class="c1">#       A path string or None to not write a pid file.</span>
+<span class="c1">#</span>
+<span class="c1">#   user - Switch worker processes to run as this user.</span>
+<span class="c1">#</span>
+<span class="c1">#       A valid user id (as an integer) or the name of a user that</span>
+<span class="c1">#       can be retrieved with a call to pwd.getpwnam(value) or None</span>
+<span class="c1">#       to not change the worker process user.</span>
+<span class="c1">#</span>
+<span class="c1">#   group - Switch worker process to run as this group.</span>
+<span class="c1">#</span>
+<span class="c1">#       A valid group id (as an integer) or the name of a user that</span>
+<span class="c1">#       can be retrieved with a call to pwd.getgrnam(value) or None</span>
+<span class="c1">#       to change the worker processes group.</span>
+<span class="c1">#</span>
+<span class="c1">#   umask - A mask for file permissions written by Gunicorn. Note that</span>
+<span class="c1">#       this affects unix socket permissions.</span>
+<span class="c1">#</span>
+<span class="c1">#       A valid value for the os.umask(mode) call or a string</span>
+<span class="c1">#       compatible with int(value, 0) (0 means Python guesses</span>
+<span class="c1">#       the base, so values like &quot;0&quot;, &quot;0xFF&quot;, &quot;0022&quot; are valid</span>
+<span class="c1">#       for decimal, hex, and octal representations)</span>
+<span class="c1">#</span>
+<span class="c1">#   tmp_upload_dir - A directory to store temporary request data when</span>
+<span class="c1">#       requests are read. This will most likely be disappearing soon.</span>
+<span class="c1">#</span>
+<span class="c1">#       A path to a directory where the process owner can write. Or</span>
+<span class="c1">#       None to signal that Python should choose one on its own.</span>
+<span class="c1">#</span>
+
+<span class="n">daemon</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="c1"># raw_env = [</span>
+<span class="c1">#     &#39;DJANGO_SECRET_KEY=something&#39;,</span>
+<span class="c1">#     &#39;SPAM=eggs&#39;,</span>
+<span class="c1"># ]</span>
+<span class="n">pidfile</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">umask</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">user</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">group</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">tmp_upload_dir</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1">#</span>
+<span class="c1">#   Logging</span>
+<span class="c1">#</span>
+<span class="c1">#   logfile - The path to a log file to write to.</span>
+<span class="c1">#</span>
+<span class="c1">#       A path string. &quot;-&quot; means log to stdout.</span>
+<span class="c1">#</span>
+<span class="c1">#   loglevel - The granularity of log output</span>
+<span class="c1">#</span>
+<span class="c1">#       A string of &quot;debug&quot;, &quot;info&quot;, &quot;warning&quot;, &quot;error&quot;, &quot;critical&quot;</span>
+<span class="c1">#</span>
+
+<span class="n">errorlog</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>
+<span class="n">loglevel</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;FASTAPI_GUNICORN_LOG_LEVEL&quot;</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">)</span>
+<span class="n">accesslog</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>
+<span class="n">access_log_format</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span>
+    <span class="s2">&quot;FASTAPI_GUNICORN_LOG_FORMAT&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;</span><span class="si">%(h)s</span><span class="s1"> </span><span class="si">%(l)s</span><span class="s1"> </span><span class="si">%(u)s</span><span class="s1"> </span><span class="si">%(t)s</span><span class="s1"> &quot;</span><span class="si">%(r)s</span><span class="s1">&quot; </span><span class="si">%(s)s</span><span class="s1"> </span><span class="si">%(b)s</span><span class="s1"> &quot;</span><span class="si">%(f)s</span><span class="s1">&quot; &quot;</span><span class="si">%(a)s</span><span class="s1">&quot;&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1">#</span>
+<span class="c1"># Process naming</span>
+<span class="c1">#</span>
+<span class="c1">#   proc_name - A base to use with setproctitle to change the way</span>
+<span class="c1">#       that Gunicorn processes are reported in the system process</span>
+<span class="c1">#       table. This affects things like &#39;ps&#39; and &#39;top&#39;. If you&#39;re</span>
+<span class="c1">#       going to be running more than one instance of Gunicorn you&#39;ll</span>
+<span class="c1">#       probably want to set a name to tell them apart. This requires</span>
+<span class="c1">#       that you install the setproctitle module.</span>
+<span class="c1">#</span>
+<span class="c1">#       A string or None to choose a default of something like &#39;gunicorn&#39;.</span>
+<span class="c1">#</span>
+
+<span class="n">proc_name</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1">#</span>
+<span class="c1"># Server hooks</span>
+<span class="c1">#</span>
+<span class="c1">#   post_fork - Called just after a worker has been forked.</span>
+<span class="c1">#</span>
+<span class="c1">#       A callable that takes a server and worker instance</span>
+<span class="c1">#       as arguments.</span>
+<span class="c1">#</span>
+<span class="c1">#   pre_fork - Called just prior to forking the worker subprocess.</span>
+<span class="c1">#</span>
+<span class="c1">#       A callable that accepts the same arguments as after_fork</span>
+<span class="c1">#</span>
+<span class="c1">#   pre_exec - Called just prior to forking off a secondary</span>
+<span class="c1">#       master process during things like config reloading.</span>
+<span class="c1">#</span>
+<span class="c1">#       A callable that takes a server instance as the sole argument.</span>
+<span class="c1">#</span>
+
+
+<span class="k">def</span> <span class="nf">post_fork</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">worker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute after a worker is forked.&quot;&quot;&quot;</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Worker spawned (pid: </span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">worker</span><span class="o">.</span><span class="n">pid</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">pre_fork</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">worker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute before a worker is forked.&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+
+<span class="k">def</span> <span class="nf">pre_exec</span><span class="p">(</span><span class="n">server</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute before a new master process is forked.&quot;&quot;&quot;</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Forked child, re-executing.&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">when_ready</span><span class="p">(</span><span class="n">server</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute just after the server is started.&quot;&quot;&quot;</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Server is ready. Spawning workers&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">worker_int</span><span class="p">(</span><span class="n">worker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute just after a worker exited on SIGINT or SIGQUIT.&quot;&quot;&quot;</span>
+    <span class="n">worker</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;worker received INT or QUIT signal&quot;</span><span class="p">)</span>
+
+    <span class="c1"># get traceback info</span>
+    <span class="kn">import</span> <span class="nn">threading</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="kn">import</span> <span class="nn">traceback</span>
+
+    <span class="n">id2name</span> <span class="o">=</span> <span class="p">{</span><span class="n">th</span><span class="o">.</span><span class="n">ident</span><span class="p">:</span> <span class="n">th</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">th</span> <span class="ow">in</span> <span class="n">threading</span><span class="o">.</span><span class="n">enumerate</span><span class="p">()}</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">threadId</span><span class="p">,</span> <span class="n">stack</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">_current_frames</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">code</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"># Thread: </span><span class="si">%s</span><span class="s2">(</span><span class="si">%d</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">id2name</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">threadId</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">threadId</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">traceback</span><span class="o">.</span><span class="n">extract_stack</span><span class="p">(</span><span class="n">stack</span><span class="p">):</span>
+            <span class="n">code</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;File: &quot;</span><span class="si">%s</span><span class="s1">&quot;, line </span><span class="si">%d</span><span class="s1">, in </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">code</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;  </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
+
+    <span class="n">worker</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">code</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">worker_abort</span><span class="p">(</span><span class="n">worker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute when worker received the SIGABRT signal.&quot;&quot;&quot;</span>
+    <span class="n">worker</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;worker received SIGABRT signal&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="routes">
+<h3>Routes<a class="headerlink" href="#routes" title="Permalink to this heading">¶</a></h3>
+<p>Endpoints are defined in <code class="docutils literal notranslate"><span class="pre">example.app.router</span></code> submodule. Just simply import your controller and include it to FastAPI router:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Application configuration - root APIRouter.</span>
+
+<span class="sd">Defines all FastAPI application endpoints.</span>
+
+<span class="sd">Resources:</span>
+<span class="sd">    1. https://fastapi.tiangolo.com/tutorial/bigger-applications</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">APIRouter</span>
+<span class="kn">from</span> <span class="nn">example.app.controllers</span> <span class="kn">import</span> <span class="n">ready</span>
+
+<span class="n">root_api_router</span> <span class="o">=</span> <span class="n">APIRouter</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/api&quot;</span><span class="p">)</span>
+
+<span class="n">root_api_router</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">ready</span><span class="o">.</span><span class="n">router</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ready&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">Usage</a><ul>
+<li><a class="reference internal" href="#cli">CLI</a><ul>
+<li><a class="reference internal" href="#wsgi-asgi-production-server">WSGI + ASGI production server</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dockerfile">Dockerfile</a></li>
+<li><a class="reference internal" href="#development">Development</a><ul>
+<li><a class="reference internal" href="#makefile">Makefile</a></li>
+<li><a class="reference internal" href="#utilities">Utilities</a></li>
+<li><a class="reference internal" href="#exceptions">Exceptions</a></li>
+<li><a class="reference internal" href="#web-routes">Web Routes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li><a class="reference internal" href="#environment-variables">Environment variables</a></li>
+<li><a class="reference internal" href="#gunicorn">Gunicorn</a></li>
+<li><a class="reference internal" href="#routes">Routes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    <ul>
+          <li>Previous: <a href="nix.html" title="previous chapter">Using Nix</a>
+          <li>Next: <a href="deployment.html" title="next chapter">Deployment</a>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Radosław Szamszur.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>
