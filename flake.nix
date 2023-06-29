@@ -14,7 +14,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     flake-parts.url = "github:hercules-ci/flake-parts";
     poetry2nix = {
-      url = "github:nix-community/poetry2nix?ref=1.40.1";
+      url = "github:nix-community/poetry2nix?ref=1.42.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
