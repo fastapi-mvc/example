@@ -27,7 +27,7 @@ aiohttp = "~3.8.4"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "~7.4.0"
-pytest-cov = "~4.0.0"
+pytest-cov = "~4.1.0"
 pytest-asyncio = "~0.21.0"
 requests = "~2.28.2"
 httpx = "~0.23.3"
